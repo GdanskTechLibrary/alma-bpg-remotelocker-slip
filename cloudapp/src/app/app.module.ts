@@ -9,6 +9,7 @@ import { MaterialModule, CloudAppTranslateModule, AlertModule } from '@exlibris/
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
+import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MainComponent } from './main/main.component';
     AlertModule,
     FormsModule,
     ReactiveFormsModule,     
+    NgxBarcodeModule,     
     CloudAppTranslateModule.forRoot(),
   ],
   providers: [
