@@ -1,0 +1,33 @@
+<app-topmenu>
+  <div buttons>
+      <button mat-flat-button color="secondary" (click)="_get_requested_resources()" >Refresh</button>
+  </div>
+</app-topmenu>
+<!--        <textArea #apiResultArea [value]="apiResult | json"></textArea> -->
+    <div *ngFor="let requester of apiResult">
+        <ngx-barcode 
+             [bc-value]="requester.user_barcode" 
+             [bc-width]="1.6"
+             [bc-height]="50"
+             [bc-font-size]="18"
+             >
+         </ngx-barcode>
+            {{ requester.user_barcode }}
+            <div *ngFor="let item of requester.book_barcode">
+
+                <div style="text-align:right">
+                    <ngx-barcode 
+                       [bc-value]="item" 
+                       [bc-width]="1.6"
+                       [bc-height]="50"
+                       [bc-font-size]="18"
+                       >
+                    </ngx-barcode>
+                    {{ item }}
+                </div>
+            </div>
+               <hr />  
+    </div>
+<div class="loading-shade" *ngIf="loading">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
