@@ -1,10 +1,11 @@
-import { Observable, of, forkJoin } from 'rxjs';
-import { finalize, tap, map, flatMap, mergeMap, concatMap } from 'rxjs/operators';
+import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
+import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../app.service';
+
 
 @Component({
   selector: 'app-remotelocker',
@@ -87,7 +88,6 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
         window_to_print.print();
         window_to_print.close();
     }
-
   _get_requested_resources():void {
     this.loading = true;
     this.restService.call<any>('/almaws/v1/task-lists/printouts?letter=Transit Letter&limit=100')
@@ -96,24 +96,32 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
             mergeMap(users => {
                 return forkJoin(users.map((user_primary_id) => {
                     return this.restService.call<any>('/users/'+user_primary_id+'/requests').pipe(
+                        catchError((err, o) => of(null)),
                         map(requests => {
+                            if (requests === null) { 
+                                return of(null);
+                            }
                             let books_descriptions = this.__select_books_descriptions(requests.user_request);
                             if (books_descriptions.length !== 0) {
                                 return {
                                         user_barcode: user_primary_id, 
                                         books_descriptions: books_descriptions,
-                                       }
+                                       }    
                             } else {
-                                return null;
+                                return of(null);
                             }
                         }),
                         )
                     })
                 );
             }),
+            map(users_cd_requ => users_cd_requ.filter(notnull => notnull !== null)),
             mergeMap(user_requests => {
+                if ((user_requests instanceof Observable)) return of(null);
                 return forkJoin(user_requests.map((request) => {
-                    if (!request) return of(null);
+                    if (request === null) return of(null);
+                    
+                    if ((request instanceof Observable)) return of(null);
                     return this.restService.call<any>('/users/'+request.user_barcode).pipe(
                         map(user_datas => {
                             
@@ -123,13 +131,17 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
                                         books_descriptions: request.books_descriptions
                                        }
                             } else {
-                                return null;
+                                return of(null);
                             }
+
                         }),
                     );
                 })
-            );}),
+            );
+            }),
             map(users_cd_requ => users_cd_requ.filter(notnull => notnull !== null)),
+            map(users_cd_requ => users_cd_requ.filter(notObservable => !(notObservable instanceof Observable))),
+            
         ).subscribe(result => {
             this.apiResult = result;
             this.loading = false;
