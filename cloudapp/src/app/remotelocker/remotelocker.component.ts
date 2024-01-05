@@ -59,7 +59,6 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
   }
   __choice_user_barcode(user_datas:any): string 
   {
-    console.log(user_datas);
     let add_id_1 = user_datas.user_identifier.filter(ui => ui.id_type.value === 'OTHER_ID_1')[0]?.value;
     let add_id_2 = user_datas.user_identifier.filter(ui => ui.id_type.value === 'OTHER_ID_2')[0]?.value;
     if (add_id_2) {
@@ -78,7 +77,19 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
     }
     return user_datas.user_identifier.filter(ui => ui.id_type.value === 'BARCODE')[0].value;
   }
+  _send_requested_resources_to_printer():void {
+
+        var section_to_print = document.getElementById('print_area');
+        var window_to_print = window.open('', '_blank', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        window_to_print.document.write(section_to_print.innerHTML);
+        window_to_print.document.close();
+        window_to_print.focus();
+        window_to_print.print();
+        window_to_print.close();
+    }
+
   _get_requested_resources():void {
+    this.loading = true;
     this.restService.call<any>('/almaws/v1/task-lists/printouts?letter=Transit Letter&limit=100')
         .pipe(
             map(printouts => this.__parse_unique_users_ids(printouts.printout)),
@@ -121,7 +132,7 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
             map(users_cd_requ => users_cd_requ.filter(notnull => notnull !== null)),
         ).subscribe(result => {
             this.apiResult = result;
-            console.log(this.apiResult);
+            this.loading = false;
         });
   }
   private tryParseJson(value: any) {

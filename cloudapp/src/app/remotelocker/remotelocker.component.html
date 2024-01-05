@@ -1,33 +1,42 @@
 <app-topmenu>
   <div buttons>
       <button mat-flat-button color="secondary" (click)="_get_requested_resources()" >Refresh</button>
+      <button mat-flat-button color="secondary" (click)="_send_requested_resources_to_printer()" >Print</button>
   </div>
 </app-topmenu>
 <!--        <textArea #apiResultArea [value]="apiResult | json"></textArea> -->
-    <div *ngFor="let requester of apiResult">
-        <ngx-barcode 
-             [bc-value]="requester.user_barcode" 
-             [bc-width]="1.6"
-             [bc-height]="50"
-             [bc-font-size]="18"
-             >
-         </ngx-barcode>
-            {{ requester.user_barcode }}
-            <div *ngFor="let item of requester.book_barcode">
 
-                <div style="text-align:right">
-                    <ngx-barcode 
-                       [bc-value]="item" 
-                       [bc-width]="1.6"
-                       [bc-height]="50"
-                       [bc-font-size]="18"
-                       >
-                    </ngx-barcode>
-                    {{ item }}
+<ng-container *ngIf="!loading; else spinner">
+    <div id="print_area">
+        <div *ngFor="let requester of apiResult">
+            <ngx-barcode 
+                 [bc-value]="requester.user_barcode" 
+                 [bc-width]="1.6"
+                 [bc-height]="50"
+                 [bc-font-size]="18"
+                 >
+             </ngx-barcode>
+                {{ requester.user_barcode }}
+                <div *ngFor="let item of requester.books_descriptions">
+                    <div style="text-align:right">
+                    <!--    <ngx-barcode 
+                           [bc-value]="item" 
+                           [bc-width]="1.6"
+                           [bc-height]="50"
+                           [bc-font-size]="18"
+                           >
+                        </ngx-barcode> -->
+                        {{ item.book_brief }} <br/>
+                        {{ item.book_barcode }}
+                    </div>
                 </div>
-            </div>
-               <hr />  
+                   <hr />  
+        </div>
     </div>
-<div class="loading-shade" *ngIf="loading">
-  <mat-spinner diameter="50"></mat-spinner>
-</div>
+</ng-container>    
+
+<ng-template #spinner>
+  <div class="loading-shade" *ngIf="loading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>
