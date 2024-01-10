@@ -1,10 +1,9 @@
-import { Observable, of } from 'rxjs';
-import { finalize, tap, map, flatMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../app.service';
+import { _get_requested_resources } from '../methods/fromApiToSlips';
 
 @Component({
   selector: 'app-holdshelf',
@@ -15,24 +14,28 @@ export class HoldshelfComponent implements OnInit, OnDestroy {
 
   loading = false;
   selectedEntity: Entity;
-  apiResult: any;
+  apiResult : any;
+  users_observable: []; 
 
   constructor(
     private restService: CloudAppRestService,
     private eventsService: CloudAppEventsService,
     private alert: AlertService,
-    private appService: AppService, 
+    private appService: AppService,
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książki na półce');
-        this._get_requested_resources()
+        this.appService.setTitle('Książi na półce');
+        this.loading = true;
+        _get_requested_resources(this.restService, 'holdShelf') // 'remotelocker' | 'holdShelf'
+            .subscribe(result => {
+                this.apiResult = result;
+                this.loading = false;
+            })
   }
 
   ngOnDestroy(): void {
   }
-  _get_requested_resources():void {
-    }
 
   private tryParseJson(value: any) {
     try {
