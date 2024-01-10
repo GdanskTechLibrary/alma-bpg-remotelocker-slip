@@ -6,7 +6,7 @@ export const menu = [
     link: 'remotelocker'
   }, 
   {
-    title: 'Półki rezerwacji',
+    title: 'Półka',
     text:  'Półka rezerwacji',
     icon: 'uxf-icon uxf-compass',
     link: 'holdshelf'

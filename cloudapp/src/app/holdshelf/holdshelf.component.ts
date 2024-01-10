@@ -4,12 +4,14 @@ import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod,
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../app.service';
 import { _get_requested_resources } from '../methods/fromApiToSlips';
+import { _send_slip_to_printer } from '../methods/printSlip';
 
 @Component({
   selector: 'app-holdshelf',
   templateUrl: './holdshelf.component.html',
   styleUrls: ['./holdshelf.component.scss']
 })
+
 export class HoldshelfComponent implements OnInit, OnDestroy {
 
   loading = false;
@@ -25,7 +27,7 @@ export class HoldshelfComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książi na półce');
+        this.appService.setTitle('Książki na półce');
         this.loading = true;
         _get_requested_resources(this.restService, 'holdShelf') // 'remotelocker' | 'holdShelf'
             .subscribe(result => {
@@ -33,7 +35,9 @@ export class HoldshelfComponent implements OnInit, OnDestroy {
                 this.loading = false;
             })
   }
-
+  _send_slip_to_printer () {
+    _send_slip_to_printer();
+  }
   ngOnDestroy(): void {
   }
 

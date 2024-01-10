@@ -4,6 +4,7 @@ import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod,
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../app.service';
 import { _get_requested_resources } from '../methods/fromApiToSlips';
+import { _send_slip_to_printer } from '../methods/printSlip';
 
 @Component({
   selector: 'app-remotelocker',
@@ -32,6 +33,10 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
                 this.apiResult = result;
                 this.loading = false;
             })
+  }
+
+  _send_slip_to_printer () {
+    _send_slip_to_printer();
   }
 
   ngOnDestroy(): void {
