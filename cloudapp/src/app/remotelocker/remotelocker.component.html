@@ -9,7 +9,7 @@
 <ng-container *ngIf="!loading; else spinner">
     <div id="print_area">
         <div *ngFor="let requester of apiResult">
-            <ngx-barcode 
+            <ngx-barcode *ngIf="requester.show_user_barcode"
                  [bc-value]="requester.user_identifier" 
                  [bc-width]="1.6"
                  [bc-height]="50"

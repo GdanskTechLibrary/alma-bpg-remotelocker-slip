@@ -30,7 +30,7 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
         this.loading = true;
         _get_requested_resources(this.restService, 'remotelocker') // 'remotelocker' | 'holdShelf'
             .subscribe(result => {
-                this.apiResult = result;
+                this.apiResult = result as any[];
                 this.loading = false;
             })
   }
