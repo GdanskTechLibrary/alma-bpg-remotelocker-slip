@@ -29,14 +29,18 @@ export class HoldshelfComponent implements OnInit, OnDestroy {
   ngOnInit() {
         this.appService.setTitle('Książki na półce');
         this.loading = true;
-        _get_requested_resources(this.restService, 'holdShelf') // 'remotelocker' | 'holdShelf'
+        this.get_requested_resources() // 'remotelocker' | 'holdShelf'
             .subscribe(result => {
                 this.apiResult = result;
                 this.loading = false;
             })
   }
-  _send_slip_to_printer () {
+  send_slip_to_printer () {
     _send_slip_to_printer();
+  }
+  
+  get_requested_resources() {
+    return _get_requested_resources(this.restService, 'holdShelf');
   }
   ngOnDestroy(): void {
   }

@@ -28,15 +28,18 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
   ngOnInit() {
         this.appService.setTitle('Książkomat');
         this.loading = true;
-        _get_requested_resources(this.restService, 'remotelocker') // 'remotelocker' | 'holdShelf'
+        this.get_requested_resources() // 'remotelocker' | 'holdShelf'
             .subscribe(result => {
                 this.apiResult = result as any[];
                 this.loading = false;
             })
   }
 
-  _send_slip_to_printer () {
+  send_slip_to_printer() {
     _send_slip_to_printer();
+  }
+  get_requested_resources() {
+    return _get_requested_resources(this.restService, 'remotelocker');
   }
 
   ngOnDestroy(): void {
