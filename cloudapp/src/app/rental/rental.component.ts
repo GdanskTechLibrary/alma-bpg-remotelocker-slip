@@ -7,12 +7,12 @@ import { _get_requested_resources } from '../methods/fromApiToSlips';
 import { _send_slip_to_printer } from '../methods/printSlip';
 
 @Component({
-  selector: 'app-remotelocker',
-  templateUrl: './remotelocker.component.html',
-  styleUrls: ['./remotelocker.component.scss']
+  selector: 'app-rental',
+  templateUrl: './rental.component.html',
+  styleUrls: ['./rental.component.scss']
 })
 
-export class RemotelockerComponent implements OnInit, OnDestroy {
+export class RentalComponent implements OnInit, OnDestroy {
 
   loading = false;
   selectedEntity: Entity;
@@ -27,9 +27,9 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książkomat');
+        this.appService.setTitle('Książki na półce');
         this.loading = true;
-        this.get_requested_resources() 
+        this.get_requested_resources()
             .subscribe(result => {
                 this.apiResult = result;
                 this.loading = false;
@@ -39,9 +39,9 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
   send_slip_to_printer() {
     _send_slip_to_printer();
   }
-
+ 
   get_requested_resources() {
-    return _get_requested_resources(this.restService, 'remotelocker');
+    return _get_requested_resources(this.restService, 'rental');
   }
 
   ngOnDestroy(): void {

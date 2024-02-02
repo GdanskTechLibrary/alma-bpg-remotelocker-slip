@@ -12,6 +12,7 @@ import { MainComponent } from './main/main.component';
 import { TopmenuComponent } from './topmenu/topmenu.component';
 import { RemotelockerComponent } from './remotelocker/remotelocker.component';
 import { HoldshelfComponent } from './holdshelf/holdshelf.component';
+import { RentalComponent } from './rental/rental.component';
 import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
@@ -35,6 +36,7 @@ import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
       TopmenuComponent,
       RemotelockerComponent,
       HoldshelfComponent,
+      RentalComponent,
    ],
    imports: [
       MaterialModule,

@@ -7,7 +7,6 @@ export function __passed_remotelocker(user_requests: Array<any>) {
 
 export function __choice_user_barcode(user_datas:any): [string, boolean] 
   {
-    console.log(user_datas);
     let add_id_1 = user_datas.user_identifier.filter(ui => ui.id_type.value === 'FARU_ELS')[0]?.value;
     let add_id_2 = user_datas.user_identifier.filter(ui => ui.id_type.value === 'PG_INDEX_NO')[0]?.value;
     if (add_id_2) {
@@ -29,3 +28,4 @@ export function __choice_user_barcode(user_datas:any): [string, boolean]
     }
     return [user_datas.primary_id, true];//.user_identifier.filter(ui => ui.id_type?.value === 'PRIMARY_ID')[0]?.value;
   }
+
