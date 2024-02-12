@@ -22,7 +22,7 @@ export function _get_requested_resources(restService: CloudAppRestService, compo
                 forkJoin(users.map((user_primary_id) => 
                     __retrieve_format_requests(user_primary_id, restService, componentVariant))
             )),
-            map(users_cd_requ => users_cd_requ.filter(notnull => notnull !== null)),
+            map(users_cd_requ => users_cd_requ?.filter(notnull => notnull !== null)),
             mergeMap(user_requests => forkJoin(user_requests.map((request) => {
                     if (request === null) return of(null);
                     if ((request instanceof Observable)) return of(null);
@@ -31,8 +31,8 @@ export function _get_requested_resources(restService: CloudAppRestService, compo
                     }
                 })
             )),
-            map(users_cd_requ => users_cd_requ.filter(notnull => notnull !== null)),
-            map(users_cd_requ => users_cd_requ.filter(notObservable => !(notObservable instanceof Observable))),
+            map(users_cd_requ => users_cd_requ?.filter(notnull => notnull !== null)),
+            map(users_cd_requ => users_cd_requ?.filter(notObservable => !(notObservable instanceof Observable))),
             catchError((err, o) => of("brak książek oczekujących")),
         );
 }

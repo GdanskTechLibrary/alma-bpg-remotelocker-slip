@@ -11,8 +11,8 @@
     </div>
     <div id="print_area">
         <div *ngFor="let requester of apiResult">
-                {{ requester.user_identifier }}
                 <div *ngFor="let item of requester.books_descriptions">
+                    {{ requester.user_identifier }}
                     <div style="text-align:right">
                     <!--    <ngx-barcode 
                            [bc-value]="item" 

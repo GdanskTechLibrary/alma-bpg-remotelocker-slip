@@ -27,7 +27,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książki na półce');
+        this.appService.setTitle('Książki do wypożyczalni');
         this.loading = true;
         this.get_requested_resources()
             .subscribe(result => {
