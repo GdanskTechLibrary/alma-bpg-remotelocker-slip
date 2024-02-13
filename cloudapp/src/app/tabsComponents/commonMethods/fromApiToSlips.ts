@@ -5,7 +5,7 @@ import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod,
 
 import { __retrieve_format_requests } from './retrieveFromAPI/requests';
 import { __retrevie_replace_uid } from './retrieveFromAPI/user_identifier';
-import { __parse_unique_uids_from_printouts} from './submethods/common';
+import { __parse_unique_uids_from_printouts} from './submethods';
 
 import { isTBookRequest, TComponentVariant } from './types';
 

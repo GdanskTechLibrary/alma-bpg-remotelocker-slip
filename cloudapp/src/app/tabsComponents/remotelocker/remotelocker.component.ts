@@ -2,17 +2,17 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { MatRadioChange } from '@angular/material/radio';
-import { AppService } from '../app.service';
-import { _get_requested_resources } from '../methods/fromApiToSlips';
-import { _send_slip_to_printer } from '../methods/printSlip';
+import { AppService } from '../../app.service';
+import { _get_requested_resources } from '../commonMethods/fromApiToSlips';
+import { _send_slip_to_printer } from '../commonMethods/printSlip';
 
 @Component({
-  selector: 'app-rental',
-  templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.scss']
+  selector: 'app-remotelocker',
+  templateUrl: './remotelocker.component.html',
+  styleUrls: ['./remotelocker.component.scss']
 })
 
-export class RentalComponent implements OnInit, OnDestroy {
+export class RemotelockerComponent implements OnInit, OnDestroy {
 
   loading = false;
   selectedEntity: Entity;
@@ -27,9 +27,9 @@ export class RentalComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książki do wypożyczalni');
+        this.appService.setTitle('Książkomat');
         this.loading = true;
-        this.get_requested_resources()
+        this.get_requested_resources() 
             .subscribe(result => {
                 this.apiResult = result;
                 this.loading = false;
@@ -39,9 +39,9 @@ export class RentalComponent implements OnInit, OnDestroy {
   send_slip_to_printer() {
     _send_slip_to_printer();
   }
- 
+
   get_requested_resources() {
-    return _get_requested_resources(this.restService, 'rental');
+    return _get_requested_resources(this.restService, 'remotelocker');
   }
 
   ngOnDestroy(): void {
