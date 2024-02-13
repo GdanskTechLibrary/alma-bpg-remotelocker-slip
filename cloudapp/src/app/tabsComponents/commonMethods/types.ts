@@ -6,4 +6,4 @@ export interface TBookRequest {
 export function isTBookRequest(obj: any): obj is TBookRequest {
     return  'user_identifier' in obj;
 }
-export type TComponentVariant = 'remotelocker' | 'holdShelf' | 'rental';
+export type TComponentVariant = 'remotelocker' | 'holdShelf' | 'lending';

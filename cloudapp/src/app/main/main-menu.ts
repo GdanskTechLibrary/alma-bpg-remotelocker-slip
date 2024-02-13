@@ -15,6 +15,6 @@ export const menu = [
     title: 'Wypożyczalnia',
     text:  'Wypożyczalnia',
     icon: 'uxf-icon uxf-memory',
-    link: 'rental'
+    link: 'lending'
   }, 
 ]

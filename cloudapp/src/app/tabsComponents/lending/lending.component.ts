@@ -7,12 +7,12 @@ import { _get_requested_resources } from '../commonMethods/fromApiToSlips';
 import { _send_slip_to_printer } from '../commonMethods/printSlip';
 
 @Component({
-  selector: 'app-rental',
-  templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.scss']
+  selector: 'app-lending',
+  templateUrl: './lending.component.html',
+  styleUrls: ['./lending.component.scss']
 })
 
-export class RentalComponent implements OnInit, OnDestroy {
+export class LendingComponent implements OnInit, OnDestroy {
 
   loading = false;
   selectedEntity: Entity;
@@ -41,7 +41,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   }
  
   get_requested_resources() {
-    return _get_requested_resources(this.restService, 'rental');
+    return _get_requested_resources(this.restService, 'lending');
   }
 
   ngOnDestroy(): void {

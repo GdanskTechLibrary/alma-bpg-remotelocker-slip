@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { RemotelockerComponent } from './tabsComponents/remotelocker/remotelocker.component';
 import { HoldshelfComponent } from './tabsComponents/holdshelf/holdshelf.component';
-import { RentalComponent } from './tabsComponents/rental/rental.component';
+import { LendingComponent } from './tabsComponents/lending/lending.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'remotelocker', component: RemotelockerComponent },
   { path: 'holdshelf', component: HoldshelfComponent },
-  { path: 'rental', component: RentalComponent },
+  { path: 'lending', component: LendingComponent },
 ];
 
 @NgModule({

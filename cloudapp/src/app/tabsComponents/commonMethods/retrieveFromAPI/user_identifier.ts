@@ -3,8 +3,8 @@ import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap } from 'rx
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 
-import { __choice_user_barcode } from '../../forRemotelocker';
-import { __extract_user_name_description } from '../../forHoldshelf';
+import { __choice_user_barcode } from '../../remotelockerMethods';
+import { __extract_user_name_description } from '../../holdshelfMethods';
 
 import { TBookRequest, isTBookRequest, TComponentVariant } from '../types';
 
