@@ -14,8 +14,8 @@ export function __retrevie_replace_uid(request : TBookRequest, restService: Clou
                             catchError((err, o) => of(null)),
                             map(user_datas => {
                                 if (!user_datas) return of(null);
-                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_GUM") return of(null);
-                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_UGD") return of(null);
+//                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_GUM") return of(null);
+//                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_UGD") return of(null);
                                 return {
                                         user_identifier: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas)[0]:__extract_user_name_description(user_datas), 
                                         show_user_barcode: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas)[1]:false,

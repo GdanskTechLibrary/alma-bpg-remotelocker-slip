@@ -17,8 +17,3 @@ export function __parse_unique_uids_from_printouts(printouts: Array<any>): Array
     return unique_users_ids.filter((value, index, array) => array.indexOf(value) === index);
   }
 
-export function __select_books_descriptions(user_requests: Array<any>): Array<string> {
-    return user_requests
-       .reduce((user_requests,book) => {
-            user_requests.push({book_barcode: book.barcode, book_brief: book.title.substr(0,40) }); return user_requests;}, []);
-  }

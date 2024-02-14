@@ -3,8 +3,8 @@ import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod,
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../../app.service';
-import { _get_requested_resources } from '../commonMethods/fromApiToSlips';
-import { _send_slip_to_printer } from '../commonMethods/printSlip';
+import { _get_requested_resources } from '../commonMethods/slips_from_api';
+import { _send_slip_to_printer } from '../commonMethods/print_slip';
 
 @Component({
   selector: 'app-remotelocker',
