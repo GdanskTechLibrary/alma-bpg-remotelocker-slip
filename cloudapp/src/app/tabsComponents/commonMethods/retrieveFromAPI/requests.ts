@@ -11,7 +11,7 @@ import { TComponentVariant } from '../types';
 
 export function __retrieve_format_requests(user_primary_id : string, restService: CloudAppRestService, componentVariant: TComponentVariant)
 {
-    return restService.call<any>('/users/'+user_primary_id+'/requests').pipe(
+    return restService.call<any>('/users/'+user_primary_id+'/requests?limit=100').pipe(
                 map(requests => {
                     if ((requests === null) || (requests.total_record_count === 0)) { 
                         return of(null);
