@@ -13,7 +13,7 @@
     "@angular/common": "~11.2.14",
     "@angular/compiler": "~11.2.14",
     "@angular/core": "~11.2.14",
-    "@angular/forms": "~11.2.14",
+    "@angular/forms": "^11.2.14",
     "@angular/language-service": "~11.2.14",
     "@angular/material": "~11.2.12",
     "@angular/platform-browser": "~11.2.14",
@@ -25,6 +25,7 @@
     "@ngx-translate/core": "~13.0.0",
     "eca-components": "^1.4.4",
     "lodash": "~4.17.21",
+    "ngx-sortable": "<2.0.0",
     "npm": "^6.11.0",
     "rxjs": "~6.5.5",
     "zone.js": "~0.10.3"

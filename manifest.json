@@ -3,6 +3,9 @@
    "title": "RemoteLocker Slip for Gdańsk Tech Library",
    "subtitle": "Slip for Remote Locker",
    "author": "Mateusz Lasota, Robert Szczodruch",
+   "pages": {
+      "settings": "/#/settings"
+   },
    "contentSecurity": {
       "sandbox": {
          "popups": true,

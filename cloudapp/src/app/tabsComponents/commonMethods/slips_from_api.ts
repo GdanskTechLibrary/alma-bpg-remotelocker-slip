@@ -9,7 +9,7 @@ import { __retrevie_replace_uid } from './retrieveFromAPI/user_identifier';
 
 import { isTBookRequest, TComponentVariant } from './types';
 
-export function _get_requested_resources(restService: CloudAppRestService, componentVariant: TComponentVariant, handleError : void): Observable<any> 
+export function _get_requested_resources(restService: CloudAppRestService, componentVariant: TComponentVariant, idents_ordered?: Array<any>, idents_checked?: Array<any>): Observable<any> 
 {
     let letter_param = '';
 
@@ -27,7 +27,7 @@ export function _get_requested_resources(restService: CloudAppRestService, compo
                     if (request === null) return of(null);
                     if ((request instanceof Observable)) return of(null);
                     if (isTBookRequest(request)) {
-                        return __retrevie_replace_uid(request, restService, componentVariant);
+                        return __retrevie_replace_uid(request, restService, componentVariant, idents_ordered, idents_checked);
                     }
                 })
             )),

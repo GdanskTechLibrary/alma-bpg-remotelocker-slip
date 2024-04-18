@@ -28,12 +28,9 @@ export class LendingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
         this.appService.setTitle('Książki do wypożyczalni');
-        this.loading = true;
-        this.get_requested_resources()
-            .subscribe(result => {
-                this.apiResult = result;
-                this.loading = false;
-            })
+        
+        this.get_requested_resources();
+            
   }
 
   send_slip_to_printer() {
@@ -41,7 +38,11 @@ export class LendingComponent implements OnInit, OnDestroy {
   }
  
   get_requested_resources() {
-    return _get_requested_resources(this.restService, 'lending');
+        this.loading = true;
+        _get_requested_resources(this.restService, 'lending').subscribe(result => {
+                this.apiResult = result;
+                this.loading = false;
+            });
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,35 @@
+<app-topmenu>
+  <div buttons>
+    <button mat-flat-button type="button" color="primary" (click)="save()" disabled="{{!(form?.dirty)&&(!form_changed)}}">Save</button>
+  </div>
+</app-topmenu>
+<div class="loading-shade" *ngIf="saving">
+  <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+</div>
+<div *ngIf="form">
+  <form [formGroup]="form">
+    <section class="settings-section">
+      <mat-checkbox labelPosition="before" formControlName="showValue">Show Value:</mat-checkbox>
+    </section>
+    <button mat-flat-button type="button" color="primary" (click)="reload_api()" >Reload from API</button>  
+    <button mat-flat-button type="button" color="primary" (click)="default_values()" >Default values (PG)</button>  
+    <section class="settings-section">
+        <ng-container *ngIf="!this.loading; else spinner">      
+            <ngx-sortable [items]="this.idents_ordered" [name]="'Typy identyfikatorów'" (listSorted)="listOrderChanged($event)">
+              <ng-template let-item >
+                  <div class="sortable-list-item">
+                      {{item.ident_ordered.code}} 
+                      <input 
+                          type="checkbox" 
+                          style="float:right" 
+                          (change)="checking(item.index)" 
+                          [checked]="this.idents_checked[item.index]"
+                          >
+                  </div>
+              </ng-template>
+          </ngx-sortable>
+        </ng-container>    
+    </section>
+  </form>
+  <pre *ngIf="form.get('showValue').value">{{ form.value | json }}</pre>
+</div>

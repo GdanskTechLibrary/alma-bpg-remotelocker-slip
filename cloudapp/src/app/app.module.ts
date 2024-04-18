@@ -14,9 +14,10 @@ import { RemotelockerComponent } from './tabsComponents/remotelocker/remotelocke
 import { HoldshelfComponent } from './tabsComponents/holdshelf/holdshelf.component';
 import { LendingComponent } from './tabsComponents/lending/lending.component';
 import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
+import { NgxSortableModule } from 'ngx-sortable'
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
-//import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './settings/settings.component';
 //import { ParallelComponent } from './parallel/parallel.component';
 //import { ExternalComponent } from './external/external.component';
 //import { XmlComponent } from './xml/xml.component';
@@ -36,6 +37,7 @@ import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
       TopmenuComponent,
       RemotelockerComponent,
       HoldshelfComponent,
+      SettingsComponent,
       LendingComponent,
    ],
    imports: [
@@ -51,6 +53,7 @@ import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
       SelectEntitiesModule,
       MenuModule,
       NgxBarcodeModule,
+      NgxSortableModule
    ],
    providers: [
       Title

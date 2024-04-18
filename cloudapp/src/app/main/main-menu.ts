@@ -17,4 +17,10 @@ export const menu = [
     icon: 'uxf-icon uxf-memory',
     link: 'lending'
   }, 
+  {
+    title: 'Settings',
+    text:  'Using the Settings Service',
+    icon: 'uxf-icon uxf-settings',
+    link: 'settings'
+  },
 ]
