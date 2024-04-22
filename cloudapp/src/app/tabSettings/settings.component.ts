@@ -4,12 +4,12 @@ import { FormGroup } from '@angular/forms';
 import { CloudAppSettingsService, FormGroupUtil } from '@exlibris/exl-cloudapp-angular-lib';
 import { CloudAppConfigService, CloudAppEventsService } from '@exlibris/exl-cloudapp-angular-lib'; 
 import { CloudAppRestService, InitData, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
-import { Settings } from '../models/settings';
+import { Settings } from '../parts/models/settings';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 //import { ErrorMessages } from '../static/error.component';
-
+//
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',

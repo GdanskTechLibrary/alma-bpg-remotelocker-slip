@@ -8,16 +8,16 @@ import { SelectEntitiesModule } from 'eca-components';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MainComponent } from './main/main.component';
-import { TopmenuComponent } from './topmenu/topmenu.component';
-import { RemotelockerComponent } from './tabsComponents/remotelocker/remotelocker.component';
-import { HoldshelfComponent } from './tabsComponents/holdshelf/holdshelf.component';
-import { LendingComponent } from './tabsComponents/lending/lending.component';
+import { MainComponent } from './parts/main/main.component';
+import { TopmenuComponent } from './parts/topmenu/topmenu.component';
+import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelocker.component';
+import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
+import { LendingComponent } from './tabsComponents/tabLending/lending.component';
 import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
 import { NgxSortableModule } from 'ngx-sortable'
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './tabSettings/settings.component';
 //import { ParallelComponent } from './parallel/parallel.component';
 //import { ExternalComponent } from './external/external.component';
 //import { XmlComponent } from './xml/xml.component';

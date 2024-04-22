@@ -5,7 +5,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../../app.service';
 import { _get_requested_resources } from '../commonMethods/slips_from_api';
 import { _send_slip_to_printer } from '../commonMethods/print_slip';
-import { Settings } from '../../models/settings';
+import { Settings } from '../../parts/models/settings';
 
 @Component({
   selector: 'app-remotelocker',
