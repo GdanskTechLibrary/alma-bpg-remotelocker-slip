@@ -8,7 +8,6 @@ interface OrderedIdentType {
 };
 
 export class Settings {
-  showValue: boolean = false;
 
   idents_ordered: any = [
     {

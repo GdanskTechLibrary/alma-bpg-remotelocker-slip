@@ -14,6 +14,8 @@ import { map, switchMap } from 'rxjs/operators';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
+
+
 export class SettingsComponent implements OnInit {
   form: FormGroup;
   form_value_var: any;
@@ -22,6 +24,7 @@ export class SettingsComponent implements OnInit {
   idents_ordered = [];
   form_changed = false;
   idents_checked = [];
+  button_all_check_caption = 'check all';
 
   constructor(
     private restService: CloudAppRestService,
@@ -43,6 +46,8 @@ export class SettingsComponent implements OnInit {
         this.idents_checked = Object.assign(new Settings(), settings).idents_checked;
   //console.log(this.idents_checked);
         this.loading = false;
+        var form_value = this.form?.value;
+        
     });
 
   }
@@ -100,6 +105,23 @@ export class SettingsComponent implements OnInit {
         this.form_changed = true;
     });
   }
+  check_all () {//
+    let isAllChecked = !this.check_all_checked();
+    var form_value = this.form?.value;
+//    console.log(this.form?.get('idents_checked'));
+    form_value.idents_checked.forEach((ident, i) => {
+        form_value.idents_checked[i] = isAllChecked;
+//        this.form?.get('idents_checked')['controls'].at(i)?.setValue(true);
+        const checkbox = document.getElementsByName('ident_ordered_'+i)[0] as HTMLInputElement;
+        if (checkbox) {
+            checkbox.checked  = isAllChecked;
+        }
+    });
+    this.form_value_var = form_value;
+    this.form_changed = true;
+    this.button_all_check_caption = 'uncheck all';
+    isAllChecked = this.check_all_checked();
+  }
   checking(value_of_index) {
     this.form_changed = true;
     var form_value = this.form?.value;
@@ -109,11 +131,24 @@ export class SettingsComponent implements OnInit {
   }
   listOrderChanged($event) {
     var form_value = this.form?.value;
-    console.log($event);
-//    console.log(this.retrieve_values_without_indexes($event));
     form_value.idents_ordered = $event;
     this.form_value_var = form_value;
     this.form_changed = true;
+  }
+  check_all_checked() {
+    let checked_all = true;
+    var form_value = this.form?.value;
+    form_value.idents_checked.forEach((ident, i) => {
+        if (!ident) {
+            checked_all = false;
+        };
+    });//
+    if (checked_all) {
+        this.button_all_check_caption = 'uncheck all';
+    } else {
+        this.button_all_check_caption = 'check all';
+    }
+    return checked_all;
   }
 }
 
