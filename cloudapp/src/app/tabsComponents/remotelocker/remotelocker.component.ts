@@ -31,7 +31,7 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książkomat');
+        this.appService.setTitle('Remotelocker');
         this.get_requested_resources();
   }
 

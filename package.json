@@ -26,7 +26,7 @@
     "eca-components": "^1.4.4",
     "lodash": "~4.17.21",
     "ngx-sortable": "<2.0.0",
-    "npm": "^6.11.0",
+    "npm": "^6.14.18",
     "rxjs": "~6.5.5",
     "zone.js": "~0.10.3"
   },
@@ -44,7 +44,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "~1.5.4",
-    "postcss": "~8.3.0",
+    "postcss": "^8.4.38",
     "typescript": "~4.1.5"
   }
 }

@@ -13,7 +13,7 @@
     <button mat-flat-button type="button" color="secondary" (click)="check_all()" >{{ button_all_check_caption }}</button>  
     <section class="settings-section">
         <ng-container *ngIf="!this.loading; else spinner">      
-            <ngx-sortable [items]="this.idents_ordered" [name]="'Typy identyfikatorów'" (listSorted)="listOrderChanged($event)">
+            <ngx-sortable [items]="this.idents_ordered" [name]="'Identifier types'" (listSorted)="listOrderChanged($event)">
               <ng-template let-item >
                   <div class="sortable-list-item">
                       {{item.ident_ordered.code}} 
@@ -30,5 +30,4 @@
         </ng-container>    
     </section>
   </form>
-  <pre *ngIf="form.get('showValue').value">{{ form.value | json }}</pre>
 </div>

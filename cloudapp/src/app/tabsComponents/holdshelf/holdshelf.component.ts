@@ -27,7 +27,7 @@ export class HoldshelfComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książki na półce');
+        this.appService.setTitle('Holdshelf');
         this.get_requested_resources(); 
             
   }

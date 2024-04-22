@@ -1,25 +1,25 @@
 export const menu = [
   {
-    title: 'Książkomat',
-    text:  'Książkomat',
+    title: 'Remotelocker',
+    text:  'Remotelocker',
     icon: 'uxf-icon uxf-newspaper',
     link: 'remotelocker'
   }, 
   {
-    title: 'Półka',
-    text:  'Półka rezerwacji',
+    title: 'Holdshelf',
+    text:  'Holdshelf',
     icon: 'uxf-icon uxf-receipt',
     link: 'holdshelf'
   }, 
   {
-    title: 'Wypożyczalnia',
-    text:  'Wypożyczalnia',
+    title: 'Lending',
+    text:  'Lending',
     icon: 'uxf-icon uxf-memory',
     link: 'lending'
   }, 
   {
     title: 'Settings',
-    text:  'Using the Settings Service',
+    text:  'Settings',
     icon: 'uxf-icon uxf-settings',
     link: 'settings'
   },

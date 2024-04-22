@@ -2,7 +2,8 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { AppService } from '../app.service';
 import { FormGroup } from '@angular/forms';
 import { CloudAppSettingsService, FormGroupUtil } from '@exlibris/exl-cloudapp-angular-lib';
-import { CloudAppConfigService, CloudAppEventsService, CloudAppRestService, InitData, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
+import { CloudAppConfigService, CloudAppEventsService } from '@exlibris/exl-cloudapp-angular-lib'; 
+import { CloudAppRestService, InitData, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { Settings } from '../models/settings';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, iif, of } from 'rxjs';
@@ -34,7 +35,7 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
- //    this.settingsService.remove().subscribe( () => console.log('removed') );
+ //   this.settingsService.remove().subscribe( () => console.log('removed') );
     this.loading = true;
     this.appService.setTitle('Settings');
     this.settingsService.get().subscribe( settings => {

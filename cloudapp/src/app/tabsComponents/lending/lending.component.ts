@@ -27,7 +27,7 @@ export class LendingComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Książki do wypożyczalni');
+        this.appService.setTitle('Lending');
         
         this.get_requested_resources();
             
