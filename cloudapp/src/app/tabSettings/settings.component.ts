@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, Input, Output } from '@angular/core';
 import { AppService } from '../app.service';
 import { FormGroup } from '@angular/forms';
 import { CloudAppSettingsService, FormGroupUtil } from '@exlibris/exl-cloudapp-angular-lib';
@@ -8,6 +8,7 @@ import { Settings } from '../parts/models/settings';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { WrappedSortableComponent } from './wrapped-sortable/wrapped-sortable.component';
 //import { ErrorMessages } from '../static/error.component';
 //
 @Component({
@@ -35,20 +36,22 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
- //   this.settingsService.remove().subscribe( () => console.log('removed') );
+//    this.settingsService.remove().subscribe( () => console.log('removed') );
     this.loading = true;
     this.appService.setTitle('Settings');
     this.settingsService.get().subscribe( settings => {
         this.form = FormGroupUtil.toFormGroup(Object.assign(new Settings(), settings))
         this.form_value_var = this.form.value;
         this.idents_ordered = Object.assign(new Settings(), settings).idents_ordered;
-
-//        this.idents_ordered = this.add_indexes_to_array(this.idents_ordered);
         this.idents_checked = Object.assign(new Settings(), settings).idents_checked;
-  //console.log(this.idents_checked);
         this.loading = false;
         var form_value = this.form?.value;
-        
+        if (this.idents_ordered.length ===0) {
+            this.restService.call<any>('/almaws/v1/conf/code-tables/UserIdentifierTypes').subscribe(result => {
+                this.idents_ordered = this.add_indexes_to_array(result.row);
+                this.loading = false;
+            })
+        }
     });
 
   }
@@ -60,22 +63,6 @@ export class SettingsComponent implements OnInit {
           i++;
       }
       return idents_ordered_indexed;
-  }
-  retrieve_values_without_indexes(idents_ordered) {
-      var idents_ordered_without_indexes = [];
-      for ( var ident_ordered of idents_ordered) {
-          idents_ordered_without_indexes.push(ident_ordered.ident_ordered);
-      }
-      return idents_ordered_without_indexes;
-  }
-  reload_api() {
-    this.saving = true;
-    this.restService.call<any>('/almaws/v1/conf/code-tables/UserIdentifierTypes').subscribe(result => {
-        this.idents_ordered = this.add_indexes_to_array(result.row);
-        this.loading = false;
-        this.saving = false;
-        this.form_changed = true;
-    })
   }
   save() {
     this.saving = true;
@@ -92,64 +79,11 @@ export class SettingsComponent implements OnInit {
       ()  => this.saving = false
     );
   }
-  default_values() {
-    this.settingsService.remove().subscribe( () => console.log('removed') );
-    this.settingsService.get().subscribe( settings => {
-        this.form = FormGroupUtil.toFormGroup(Object.assign(new Settings(), settings))
-        this.form_value_var = this.form.value;
-        this.idents_ordered = Object.assign(new Settings(), settings).idents_ordered;
-
-//        this.idents_ordered = this.add_indexes_to_array(this.idents_ordered);
-        this.idents_checked = Object.assign(new Settings(), settings).idents_checked;
-  //console.log(this.idents_checked);
-        this.loading = false;
-        this.form_changed = true;
-    });
+  form_change(form_changed: boolean) {
+    this.form_changed = form_changed;
   }
-  check_all () {//
-    let isAllChecked = !this.check_all_checked();
-    var form_value = this.form?.value;
-//    console.log(this.form?.get('idents_checked'));
-    form_value.idents_checked.forEach((ident, i) => {
-        form_value.idents_checked[i] = isAllChecked;
-//        this.form?.get('idents_checked')['controls'].at(i)?.setValue(true);
-        const checkbox = document.getElementsByName('ident_ordered_'+i)[0] as HTMLInputElement;
-        if (checkbox) {
-            checkbox.checked  = isAllChecked;
-        }
-    });
-    this.form_value_var = form_value;
-    this.form_changed = true;
-    this.button_all_check_caption = 'uncheck all';
-    isAllChecked = this.check_all_checked();
-  }
-  checking(value_of_index) {
-    this.form_changed = true;
-    var form_value = this.form?.value;
-    form_value.idents_checked[value_of_index] = !form_value.idents_checked[value_of_index];
-    this.form_value_var = form_value;
-    this.form_changed = true;
-  }
-  listOrderChanged($event) {
-    var form_value = this.form?.value;
-    form_value.idents_ordered = $event;
-    this.form_value_var = form_value;
-    this.form_changed = true;
-  }
-  check_all_checked() {
-    let checked_all = true;
-    var form_value = this.form?.value;
-    form_value.idents_checked.forEach((ident, i) => {
-        if (!ident) {
-            checked_all = false;
-        };
-    });//
-    if (checked_all) {
-        this.button_all_check_caption = 'uncheck all';
-    } else {
-        this.button_all_check_caption = 'check all';
-    }
-    return checked_all;
+  form_var_updated(form_var: Array<any>) {
+    this.form_value_var = form_var;
   }
 }
 
@@ -168,7 +102,7 @@ export class ConfigurationGuard implements CanActivate {
       switchMap( initData => this.restService.call(`/users/${initData.user.primaryId}`)),
       map( user => {
         if (!user.user_role.some(role=>role.role_type.value=='221')) {
-          this.router.navigate(['/error'], 
+          this.router.navigate(['/'], 
             { queryParams: { error: "Brak uprawnień" }});
           return false;
         }

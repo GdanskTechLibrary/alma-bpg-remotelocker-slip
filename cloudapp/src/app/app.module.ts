@@ -18,6 +18,7 @@ import { NgxSortableModule } from 'ngx-sortable'
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
 import { SettingsComponent } from './tabSettings/settings.component';
+import { WrappedSortableComponent } from './tabSettings/wrapped-sortable/wrapped-sortable.component';
 //import { ParallelComponent } from './parallel/parallel.component';
 //import { ExternalComponent } from './external/external.component';
 //import { XmlComponent } from './xml/xml.component';
@@ -39,6 +40,7 @@ import { SettingsComponent } from './tabSettings/settings.component';
       HoldshelfComponent,
       SettingsComponent,
       LendingComponent,
+      WrappedSortableComponent,
    ],
    imports: [
       MaterialModule,

@@ -8,25 +8,9 @@
 </div>
 <div *ngIf="form">
   <form [formGroup]="form">
-    <button mat-flat-button type="button" color="primary" (click)="reload_api()" >Reload from API</button>  
-    <button mat-flat-button type="button" color="primary" (click)="default_values()" >Default values (PG)</button>  
-    <button mat-flat-button type="button" color="secondary" (click)="check_all()" >{{ button_all_check_caption }}</button>  
     <section class="settings-section">
-        <ng-container *ngIf="!this.loading; else spinner">      
-            <ngx-sortable [items]="this.idents_ordered" [name]="'Identifier types'" (listSorted)="listOrderChanged($event)">
-              <ng-template let-item >
-                  <div class="sortable-list-item">
-                      {{item.ident_ordered.code}} 
-                      <input
-                          name="ident_ordered_{{item.index}}"
-                          type="checkbox" 
-                          style="float:right" 
-                          (change)="checking(item.index);check_all_checked()" 
-                          [checked]="this.idents_checked[item.index]"
-                          >
-                  </div>
-              </ng-template>
-          </ngx-sortable>
+        <ng-container *ngIf="!this.loading; else spinner">     
+            <app-wrapped-sortable [idents_ordered]="idents_ordered" [idents_checked]="idents_checked" [form]="form" (form_changed)="form_change($event)" (form_value_var)="form_var_updated($event)"> </app-wrapped-sortable>
         </ng-container>    
     </section>
   </form>
