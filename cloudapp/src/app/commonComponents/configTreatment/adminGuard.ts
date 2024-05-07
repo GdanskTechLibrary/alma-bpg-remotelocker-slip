@@ -7,7 +7,7 @@ import { Component, OnInit, Injectable, Input, Output } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class ConfigurationGuard implements CanActivate {
+export class adminGuard implements CanActivate {
   constructor (
     private eventsService: CloudAppEventsService,
     private restService: CloudAppRestService,

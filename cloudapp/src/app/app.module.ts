@@ -8,8 +8,8 @@ import { SelectEntitiesModule } from 'eca-components';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MainComponent } from './parts/main/main.component';
-import { TopmenuComponent } from './parts/topmenu/topmenu.component';
+import { MainComponent } from './commonComponents/main/main.component';
+import { TopmenuComponent } from './commonComponents/topmenu/topmenu.component';
 import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelocker.component';
 import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
 import { LendingComponent } from './tabsComponents/tabLending/lending.component';

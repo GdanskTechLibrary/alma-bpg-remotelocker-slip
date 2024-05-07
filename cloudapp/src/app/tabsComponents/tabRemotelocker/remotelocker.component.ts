@@ -5,7 +5,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../../app.service';
 import { _get_requested_resources } from '../commonMethods/slips_from_api';
 import { _send_slip_to_printer } from '../commonMethods/print_slip';
-import { ConfigLoader } from '../../parts/commonComponents/configLoader';
+import { ConfigLoader } from '../../commonComponents/configTreatment/configLoader';
 import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
 import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
 

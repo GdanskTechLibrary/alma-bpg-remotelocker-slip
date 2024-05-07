@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { FormGroupUtil } from '@exlibris/exl-cloudapp-angular-lib';
 import { CloudAppConfigService, CloudAppEventsService } from '@exlibris/exl-cloudapp-angular-lib'; 
 import { CloudAppRestService, InitData, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
-import { ConfigLoader } from '../parts/commonComponents/configLoader';
+import { ConfigLoader } from '../commonComponents/configTreatment/configLoader';
 import { Observable, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { WrappedSortableComponent } from './wrapped-sortable/wrapped-sortable.component';

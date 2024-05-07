@@ -1,5 +1,5 @@
 
-@import './app/parts/main/main.component.theme';
+@import './app/commonComponents/main/main.component.theme';
 
 @mixin themed-styles($theme, $typography) {
     /* Include themed component mixins or theme dependent styles here */

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './parts/main/main.component';
+import { MainComponent } from './commonComponents/main/main.component';
 import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelocker.component';
 import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
 import { LendingComponent } from './tabsComponents/tabLending/lending.component';
 import { ConfigComponent } from './tabConfig/config.component';
-import { ConfigurationGuard } from './ConfigurationGuard';
+import { adminGuard } from './commonComponents/configTreatment/adminGuard';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
