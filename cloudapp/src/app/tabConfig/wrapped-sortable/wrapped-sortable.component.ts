@@ -21,18 +21,18 @@ export class WrappedSortableComponent implements OnInit {
   }
   check_all () {
     var form_value = this.form?.value;
-    let isAllChecked = !this.check_all_checked();
+    let areAllChecked = !this.are_all_checked();
     form_value.idents_checked.forEach((ident, i) => {
-        form_value.idents_checked[i] = isAllChecked;
+        form_value.idents_checked[i] = areAllChecked;
         const checkbox = document.getElementsByName('ident_ordered_'+i)[0] as HTMLInputElement;
         if (checkbox) {
-            checkbox.checked  = isAllChecked;
+            checkbox.checked  = areAllChecked;
         }
     });
+    this.button_all_check_caption = 'uncheck all';
+    areAllChecked = this.are_all_checked();
     this.form_value_var.emit(form_value);
     this.form_changed.emit(true);
-    this.button_all_check_caption = 'uncheck all';
-    isAllChecked = this.check_all_checked();
   }
   checking(value_of_index) {
     var form_value = this.form?.value;
@@ -46,7 +46,7 @@ export class WrappedSortableComponent implements OnInit {
     this.form_value_var.emit(form_value);
     this.form_changed.emit(true);
   }
-  check_all_checked() {
+  are_all_checked() {
     let checked_all = true;
     var form_value = this.form?.value;
     form_value.idents_checked.forEach((ident, i) => {
@@ -59,6 +59,7 @@ export class WrappedSortableComponent implements OnInit {
     } else {
         this.button_all_check_caption = 'check all';
     }
+    this.form_value_var.emit(form_value);
     return checked_all;
   }
 }

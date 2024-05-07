@@ -17,8 +17,8 @@ import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
 import { NgxSortableModule } from 'ngx-sortable'
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
-import { SettingsComponent } from './tabSettings/settings.component';
-import { WrappedSortableComponent } from './tabSettings/wrapped-sortable/wrapped-sortable.component';
+import { ConfigComponent } from './tabConfig/config.component';
+import { WrappedSortableComponent } from './tabConfig/wrapped-sortable/wrapped-sortable.component';
 //import { ParallelComponent } from './parallel/parallel.component';
 //import { ExternalComponent } from './external/external.component';
 //import { XmlComponent } from './xml/xml.component';
@@ -38,7 +38,7 @@ import { WrappedSortableComponent } from './tabSettings/wrapped-sortable/wrapped
       TopmenuComponent,
       RemotelockerComponent,
       HoldshelfComponent,
-      SettingsComponent,
+      ConfigComponent,
       LendingComponent,
       WrappedSortableComponent,
    ],

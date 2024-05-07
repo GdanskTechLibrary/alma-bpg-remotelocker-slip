@@ -12,7 +12,7 @@ import { isTBookRequest, TComponentVariant } from './types';
 export function _get_requested_resources(restService: CloudAppRestService, componentVariant: TComponentVariant, idents_ordered?: Array<any>, idents_checked?: Array<any>): Observable<any> 
 {
     let letter_param = '';
-
+    console.log(idents_checked);
     if (componentVariant === 'remotelocker') { letter_param = 'letter=Transit Letter&'; }
 
     return restService.call<any>('/almaws/v1/task-lists/printouts?'+letter_param+'limit=100')

@@ -4,14 +4,15 @@ import { MainComponent } from './parts/main/main.component';
 import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelocker.component';
 import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
 import { LendingComponent } from './tabsComponents/tabLending/lending.component';
-import { SettingsComponent } from './tabSettings/settings.component';
+import { ConfigComponent } from './tabConfig/config.component';
+import { ConfigurationGuard } from './ConfigurationGuard';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'remotelocker', component: RemotelockerComponent },
   { path: 'holdshelf', component: HoldshelfComponent },
   { path: 'lending', component: LendingComponent },
-  { path: 'settings', component: SettingsComponent },
+  { path: 'config', component: ConfigComponent },
 ];
 
 @NgModule({

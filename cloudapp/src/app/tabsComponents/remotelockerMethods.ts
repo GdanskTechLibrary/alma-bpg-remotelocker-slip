@@ -11,8 +11,8 @@ export function __choice_user_barcode(user_datas:any, idents_ordered: Array<any>
     let i = 0;
     for (let ident of idents_ordered) {
         if(idents_checked[i]) {
-            if (___choice_identifier(user_datas, ident.ident_ordered.code)) {
-                return [___choice_identifier(user_datas, ident.ident_ordered.code), true];
+            if (___choice_identifier(user_datas, ident.ident.code)) {
+                return [___choice_identifier(user_datas, ident.ident.code), true];
             }
         }
         i++;

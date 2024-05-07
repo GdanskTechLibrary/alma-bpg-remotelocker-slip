@@ -1,11 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CloudAppSettingsService, CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
+import { CloudAppConfigService, CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../../app.service';
 import { _get_requested_resources } from '../commonMethods/slips_from_api';
 import { _send_slip_to_printer } from '../commonMethods/print_slip';
-import { Settings } from '../../parts/models/settings';
+import { ConfigLoader } from '../../parts/commonComponents/configLoader';
+import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
+import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
+
+type TConfig = {
+    idents_ordered: Array<any>,
+    idents_checked: Array<boolean>
+}
 
 @Component({
   selector: 'app-remotelocker',
@@ -25,7 +32,7 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
   constructor(
     private restService: CloudAppRestService,
     private eventsService: CloudAppEventsService,
-    private settingsService: CloudAppSettingsService,
+    private configService: CloudAppConfigService,
     private alert: AlertService,
     private appService: AppService,
   ) { }
@@ -41,16 +48,19 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
 
   get_requested_resources() {
         this.loading = true;
-        this.settingsService.get().subscribe( settings => {
-          this.idents_ordered = Object.assign(new Settings(), settings).idents_ordered;
-          this.idents_checked = Object.assign(new Settings(), settings).idents_checked;
-          _get_requested_resources(this.restService, 'remotelocker', this.idents_ordered, this.idents_checked)
-                .subscribe(result => {
+       // let config = await new ConfigLoader(this.restService, this.configService).getConfig();
+        
+
+        let configuration = new ConfigLoader(this.restService, this.configService);
+        configuration.getConfig()
+            .pipe(mergeMap((conf: TConfig) => {
+                return _get_requested_resources(this.restService, 'remotelocker', conf.idents_ordered, conf.idents_checked)
+           })).subscribe((result) =>{
+                    console.log('t',result);
+
                     this.apiResult = result;
                     this.loading = false;
-                })
-        });
-    
+            });
   }
 
   ngOnDestroy(): void {

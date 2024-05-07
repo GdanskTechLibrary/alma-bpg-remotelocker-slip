@@ -18,9 +18,9 @@ export const menu = [
     link: 'lending'
   }, 
   {
-    title: 'Settings',
-    text:  'Settings',
+    title: 'Config',
+    text:  'Config',
     icon: 'uxf-icon uxf-settings',
-    link: 'settings'
+    link: 'config'
   },
 ]

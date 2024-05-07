@@ -1,8 +1,8 @@
-    <button mat-flat-button type="button" color="secondary" (click)="check_all()" >{{ button_all_check_caption }}</button>  
+<button mat-flat-button type="button" color="secondary" (click)="check_all()" >{{ button_all_check_caption }}</button>  
 <ngx-sortable [items]="idents_ordered" [name]="'Identifier types'" (listSorted)="listOrderChanged($event)">
   <ng-template let-item >
       <div class="sortable-list-item">
-          {{item.ident_ordered.code}} 
+          {{item.ident.code}} 
           <input
               name="ident_ordered_{{item.index}}"
               type="checkbox" 

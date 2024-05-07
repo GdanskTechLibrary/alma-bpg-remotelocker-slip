@@ -10,7 +10,7 @@
   <form [formGroup]="form">
     <section class="settings-section">
         <ng-container *ngIf="!this.loading; else spinner">     
-            <app-wrapped-sortable [idents_ordered]="idents_ordered" [idents_checked]="idents_checked" [form]="form" (form_changed)="form_change($event)" (form_value_var)="form_var_updated($event)"> </app-wrapped-sortable>
+            <app-wrapped-sortable [idents_ordered]="config.idents_ordered" [idents_checked]="config.idents_checked" [form]="form" (form_changed)="form_change($event)" (form_value_var)="form_var_updated($event)"> </app-wrapped-sortable>
         </ng-container>    
     </section>
   </form>
