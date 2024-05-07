@@ -5,7 +5,6 @@ import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelo
 import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
 import { LendingComponent } from './tabsComponents/tabLending/lending.component';
 import { ConfigComponent } from './tabConfig/config.component';
-import { adminGuard } from './commonComponents/configTreatment/adminGuard';
 
 const routes: Routes = [
   { path: '', component: MainComponent },

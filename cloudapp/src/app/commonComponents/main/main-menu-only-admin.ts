@@ -1,4 +1,4 @@
-export const menu = [
+export const menu_only_admin = [
   {
     title: 'Remotelocker',
     text:  'Remotelocker',
@@ -17,4 +17,10 @@ export const menu = [
     icon: 'uxf-icon uxf-memory',
     link: 'lending',
   }, 
+  {
+    title: 'Config',
+    text:  'Config',
+    icon: 'uxf-icon uxf-settings',
+    link: 'config',
+  },
 ]

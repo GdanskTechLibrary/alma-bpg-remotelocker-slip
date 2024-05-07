@@ -8,7 +8,6 @@ import { ConfigLoader } from '../commonComponents/configTreatment/configLoader';
 import { Observable, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { WrappedSortableComponent } from './wrapped-sortable/wrapped-sortable.component';
-//import { ErrorMessages } from '../static/error.component';
 
 type TConfig = {
     idents_ordered: Array<any>,
@@ -35,18 +34,25 @@ export class ConfigComponent implements OnInit {
     private appService: AppService,
     private configService: CloudAppConfigService,
     private alert: AlertService,
+    private eventsService: CloudAppEventsService
+
   ) { }
 
   ngOnInit() {
 //    this.configService.remove().subscribe( () => console.log('removed') );
-    this.loading = true;
-    this.appService.setTitle('Config');
-    let configuration = new ConfigLoader(this.restService, this.configService);
-    configuration.getConfig().subscribe(conf => 
-        {
-            this.form = FormGroupUtil.toFormGroup(conf);
-            this.config = conf;
-            this.loading = false;
+    this.eventsService.getInitData().subscribe(data=>
+        {   
+        if (data.user.isAdmin) {
+            this.loading = true;
+            this.appService.setTitle('Config');
+            let configuration = new ConfigLoader(this.restService, this.configService);
+            configuration.getConfig().subscribe(conf => 
+                {
+                    this.form = FormGroupUtil.toFormGroup(conf);
+                    this.config = conf;
+                    this.loading = false;
+                });
+            }
         });
     };
   save() {

@@ -48,16 +48,11 @@ export class RemotelockerComponent implements OnInit, OnDestroy {
 
   get_requested_resources() {
         this.loading = true;
-       // let config = await new ConfigLoader(this.restService, this.configService).getConfig();
-        
-
         let configuration = new ConfigLoader(this.restService, this.configService);
         configuration.getConfig()
             .pipe(mergeMap((conf: TConfig) => {
                 return _get_requested_resources(this.restService, 'remotelocker', conf.idents_ordered, conf.idents_checked)
            })).subscribe((result) =>{
-                    console.log('t',result);
-
                     this.apiResult = result;
                     this.loading = false;
             });
