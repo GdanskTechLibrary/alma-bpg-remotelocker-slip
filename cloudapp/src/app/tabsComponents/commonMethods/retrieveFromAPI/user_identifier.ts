@@ -20,6 +20,7 @@ export function __retrevie_replace_uid(request : TBookRequest, restService: Clou
                                 return {
                                         user_identifier: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas, idents_ordered, idents_checked)[0]:__extract_user_name_description(user_datas), 
                                         show_user_barcode: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas, idents_ordered, idents_checked)[1]:false,
+                                        identifier_type: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas, idents_ordered, idents_checked)[2]:false,
                                         books_descriptions: request.books_descriptions
                                        }
 

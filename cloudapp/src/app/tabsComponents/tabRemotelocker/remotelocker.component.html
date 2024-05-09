@@ -18,7 +18,7 @@
                  [bc-font-size]="18"
                  >
              </ngx-barcode>
-                {{ requester.user_identifier }}
+                {{ requester.user_identifier }} ({{ requester.identifier_type }})
                 <div *ngFor="let item of requester.books_descriptions">
                     <div style="text-align:right">
                     <!--    <ngx-barcode 
@@ -29,7 +29,7 @@
                            >
                         </ngx-barcode> -->
                         {{ item.book_brief }} <br/>
-                        {{ item.book_barcode }}
+                        {{ item.book_barcode }} 
                     </div>
                 </div>
                    <hr />  
