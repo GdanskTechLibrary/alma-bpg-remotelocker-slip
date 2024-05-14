@@ -2,11 +2,7 @@ import { CloudAppRestService } from '@exlibris/exl-cloudapp-angular-lib';
 import { CloudAppConfigService } from '@exlibris/exl-cloudapp-angular-lib'; 
 import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
 import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
-
-type TConfig = {
-    idents_ordered: Array<any>,
-    idents_checked: Array<boolean>
-}
+import { TConfig } from '../../commonMethods/types';
 
 export class ConfigLoader {
     conf: TConfig = {

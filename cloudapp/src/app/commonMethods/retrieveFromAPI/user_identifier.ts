@@ -5,17 +5,15 @@ import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod,
 
 import { __choice_user_barcode } from './remotelockerMethods';
 
-import { TBookRequest, isTBookRequest, TComponentVariant } from '../types';
+import { TBookRequest, isTBookRequest } from '../types';
 
 
-export function __retrevie_replace_uid(request : TBookRequest, restService: CloudAppRestService, componentVariant: TComponentVariant, idents_ordered?: Array<any>, idents_checked?: Array<any>)
+export function __retrevie_replace_uid(request : TBookRequest, restService: CloudAppRestService, idents_ordered?: Array<any>, idents_checked?: Array<any>)
 {
     return restService.call<any>('/users/'+request.user_identifier).pipe(
                             catchError((err, o) => of(null)),
                             map(user_datas => {
                                 if (!user_datas) return of(null);
-//                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_GUM") return of(null);
-//                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_UGD") return of(null);
                                 return {
                                         user_identifier: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[0], 
                                         show_user_barcode: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[1],

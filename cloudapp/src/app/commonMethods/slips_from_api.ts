@@ -7,27 +7,26 @@ import { __parse_unique_uids_from_printouts} from './parse_uids';
 import { __retrieve_format_requests } from './retrieveFromAPI/requests';
 import { __retrevie_replace_uid } from './retrieveFromAPI/user_identifier';
 
-import { isTBookRequest, TComponentVariant } from './types';
+import { isTBookRequest } from './types';
 
-export function _get_requested_resources(restService: CloudAppRestService, componentVariant: TComponentVariant, idents_ordered?: Array<any>, idents_checked?: Array<any>): Observable<any> 
+export function _get_requested_resources(restService: CloudAppRestService, idents_ordered?: Array<any>, idents_checked?: Array<any>): Observable<any> 
 {
     let letter_param = '';
     console.log(idents_checked);
-    if (componentVariant === 'remotelocker') { letter_param = 'letter=Transit Letter&'; }
 
-    return restService.call<any>('/almaws/v1/task-lists/printouts?'+letter_param+'limit=100')
+    return restService.call<any>('/almaws/v1/task-lists/printouts?letter=Transit Letter&limit=100')
         .pipe(
             map(printouts => __parse_unique_uids_from_printouts(printouts.printout)),
             mergeMap(users => 
                 forkJoin(users.map((user_primary_id) => 
-                    __retrieve_format_requests(user_primary_id, restService, componentVariant))
+                    __retrieve_format_requests(user_primary_id, restService))
             )),
             map(users_cd_requ => users_cd_requ?.filter(notnull => notnull !== null)),
             mergeMap(user_requests => forkJoin(user_requests.map((request) => {
                     if (request === null) return of(null);
                     if ((request instanceof Observable)) return of(null);
                     if (isTBookRequest(request)) {
-                        return __retrevie_replace_uid(request, restService, componentVariant, idents_ordered, idents_checked);
+                        return __retrevie_replace_uid(request, restService, idents_ordered, idents_checked);
                     }
                 })
             )),

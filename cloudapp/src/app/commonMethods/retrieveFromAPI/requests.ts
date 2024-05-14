@@ -5,9 +5,7 @@ import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod,
 
 import { __passed_remotelocker } from './remotelockerMethods';
 
-import { TComponentVariant } from '../types';
-
-export function __retrieve_format_requests(user_primary_id : string, restService: CloudAppRestService, componentVariant: TComponentVariant)
+export function __retrieve_format_requests(user_primary_id : string, restService: CloudAppRestService)
 {
     return restService.call<any>('/users/'+user_primary_id+'/requests?limit=100').pipe(
                 map(requests => {

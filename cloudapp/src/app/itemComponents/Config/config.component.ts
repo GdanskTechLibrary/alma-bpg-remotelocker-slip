@@ -8,11 +8,8 @@ import { ConfigLoader } from '../../commonComponents/configTreatment/configLoade
 import { Observable, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { WrappedSortableComponent } from './wrapped-sortable/wrapped-sortable.component';
+import { TConfig } from '../../commonMethods/types';
 
-type TConfig = {
-    idents_ordered: Array<any>,
-    idents_checked: Array<boolean>
-}
 
 @Component({
   selector: 'app-config',

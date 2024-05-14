@@ -8,11 +8,7 @@ import { _send_slip_to_printer } from '../../commonMethods/print_slip';
 import { ConfigLoader } from '../../commonComponents/configTreatment/configLoader';
 import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
 import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
-
-type TConfig = {
-    idents_ordered: Array<any>,
-    idents_checked: Array<boolean>
-}
+import { TConfig } from '../../commonMethods/types';
 
 @Component({
   selector: 'app-item-template',
@@ -51,7 +47,7 @@ export class ItemTemplateComponent implements OnInit, OnDestroy {
         let configuration = new ConfigLoader(this.restService, this.configService);
         configuration.getConfig()
             .pipe(mergeMap((conf: TConfig) => {
-                return _get_requested_resources(this.restService, 'remotelocker', conf.idents_ordered, conf.idents_checked)
+                return _get_requested_resources(this.restService, conf.idents_ordered, conf.idents_checked)
            })).subscribe((result) =>{
                     this.apiResult = result;
                     this.loading = false;
