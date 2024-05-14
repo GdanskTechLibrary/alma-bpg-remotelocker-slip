@@ -3,8 +3,8 @@ import { CloudAppConfigService, CloudAppRestService, CloudAppEventsService, Requ
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../../app.service';
-import { _get_requested_resources } from '../commonMethods/slips_from_api';
-import { _send_slip_to_printer } from '../commonMethods/print_slip';
+import { _get_requested_resources } from '../../commonMethods/slips_from_api';
+import { _send_slip_to_printer } from '../../commonMethods/print_slip';
 import { ConfigLoader } from '../../commonComponents/configTreatment/configLoader';
 import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
 import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
@@ -15,12 +15,12 @@ type TConfig = {
 }
 
 @Component({
-  selector: 'app-remotelocker',
-  templateUrl: './remotelocker.component.html',
-  styleUrls: ['./remotelocker.component.scss']
+  selector: 'app-item-template',
+  templateUrl: './item-template.component.html',
+  styleUrls: ['./item-template.component.scss']
 })
 
-export class RemotelockerComponent implements OnInit, OnDestroy {
+export class ItemTemplateComponent implements OnInit, OnDestroy {
 
   loading = false;
   selectedEntity: Entity;

@@ -10,9 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PanelComponent } from './commonComponents/panel/panel.component';
 import { ControlMenuComponent } from './commonComponents/control-menu/control-menu.component';
-import { RemotelockerComponent } from './itemComponents/tabRemotelocker/remotelocker.component';
-import { HoldshelfComponent } from './itemComponents/tabHoldshelf/holdshelf.component';
-import { LendingComponent } from './itemComponents/tabLending/lending.component';
+import { ItemTemplateComponent } from './itemComponents/Template/item-template.component';
 import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
 import { NgxSortableModule } from 'ngx-sortable'
 //import { NewrouteComponent } from './newroute/newroute.component';
@@ -36,10 +34,8 @@ import { WrappedSortableComponent } from './itemComponents/Config/wrapped-sortab
       AppComponent,
       PanelComponent,
       ControlMenuComponent,
-      RemotelockerComponent,
-      HoldshelfComponent,
+      ItemTemplateComponent,
       ConfigComponent,
-      LendingComponent,
       WrappedSortableComponent,
    ],
    imports: [

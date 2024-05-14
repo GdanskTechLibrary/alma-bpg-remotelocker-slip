@@ -3,8 +3,7 @@ import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap } from 'rx
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 
-import { __choice_user_barcode } from '../../remotelockerMethods';
-import { __extract_user_name_description } from '../../holdshelfMethods';
+import { __choice_user_barcode } from './remotelockerMethods';
 
 import { TBookRequest, isTBookRequest, TComponentVariant } from '../types';
 
@@ -18,9 +17,9 @@ export function __retrevie_replace_uid(request : TBookRequest, restService: Clou
 //                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_GUM") return of(null);
 //                                if (componentVariant === 'remotelocker' && user_datas?.external_id === "48FAR_UGD") return of(null);
                                 return {
-                                        user_identifier: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas, idents_ordered, idents_checked)[0]:__extract_user_name_description(user_datas), 
-                                        show_user_barcode: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas, idents_ordered, idents_checked)[1]:false,
-                                        identifier_type: (componentVariant === 'remotelocker')?__choice_user_barcode(user_datas, idents_ordered, idents_checked)[2]:false,
+                                        user_identifier: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[0], 
+                                        show_user_barcode: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[1],
+                                        identifier_type: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[2],
                                         books_descriptions: request.books_descriptions
                                        }
 
