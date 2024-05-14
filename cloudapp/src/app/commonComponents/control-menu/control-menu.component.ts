@@ -4,10 +4,10 @@ import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-topmenu',
-  templateUrl: './topmenu.component.html',
-  styleUrls: ['./topmenu.component.scss']
+  templateUrl: './control-menu.component.html',
+  styleUrls: ['./control-menu.component.scss']
 })
-export class TopmenuComponent implements OnInit {
+export class ControlMenuComponent implements OnInit {
   route: Router;
   title: String;
 

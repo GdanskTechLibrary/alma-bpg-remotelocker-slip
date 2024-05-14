@@ -8,17 +8,17 @@ import { SelectEntitiesModule } from 'eca-components';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MainComponent } from './commonComponents/main/main.component';
-import { TopmenuComponent } from './commonComponents/topmenu/topmenu.component';
-import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelocker.component';
-import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
-import { LendingComponent } from './tabsComponents/tabLending/lending.component';
+import { PanelComponent } from './commonComponents/panel/panel.component';
+import { ControlMenuComponent } from './commonComponents/control-menu/control-menu.component';
+import { RemotelockerComponent } from './itemComponents/tabRemotelocker/remotelocker.component';
+import { HoldshelfComponent } from './itemComponents/tabHoldshelf/holdshelf.component';
+import { LendingComponent } from './itemComponents/tabLending/lending.component';
 import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
 import { NgxSortableModule } from 'ngx-sortable'
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
-import { ConfigComponent } from './tabConfig/config.component';
-import { WrappedSortableComponent } from './tabConfig/wrapped-sortable/wrapped-sortable.component';
+import { ConfigComponent } from './itemComponents/Config/config.component';
+import { WrappedSortableComponent } from './itemComponents/Config/wrapped-sortable/wrapped-sortable.component';
 //import { ParallelComponent } from './parallel/parallel.component';
 //import { ExternalComponent } from './external/external.component';
 //import { XmlComponent } from './xml/xml.component';
@@ -34,8 +34,8 @@ import { WrappedSortableComponent } from './tabConfig/wrapped-sortable/wrapped-s
 @NgModule({
    declarations: [	
       AppComponent,
-      MainComponent,
-      TopmenuComponent,
+      PanelComponent,
+      ControlMenuComponent,
       RemotelockerComponent,
       HoldshelfComponent,
       ConfigComponent,

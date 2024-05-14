@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
 import { CloudAppEventsService } from '@exlibris/exl-cloudapp-angular-lib';
-import { menu } from './main-menu';
-import { menu_only_admin } from './main-menu-only-admin';
+import { menu } from './item-template';
+import { menu_only_admin } from './item-config';
 
 @Component({
   selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  templateUrl: './panel.component.html',
+  styleUrls: ['./panel.component.scss']
 })
-export class MainComponent implements OnInit {
+export class PanelComponent implements OnInit {
   isAdmin = false;
   menu = menu;
 

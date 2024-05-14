@@ -1,9 +1,9 @@
 
-@import './app/commonComponents/main/main.component.theme';
+@import './app/commonComponents/panel/panel.component.theme';
 
 @mixin themed-styles($theme, $typography) {
     /* Include themed component mixins or theme dependent styles here */
-    @include main-component-theme($theme, $typography);
+    @include panel-component-theme($theme, $typography);
 }
 
 @mixin global-styles {

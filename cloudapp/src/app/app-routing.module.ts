@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './commonComponents/main/main.component';
-import { RemotelockerComponent } from './tabsComponents/tabRemotelocker/remotelocker.component';
-import { HoldshelfComponent } from './tabsComponents/tabHoldshelf/holdshelf.component';
-import { LendingComponent } from './tabsComponents/tabLending/lending.component';
-import { ConfigComponent } from './tabConfig/config.component';
+import { PanelComponent } from './commonComponents/panel/panel.component';
+import { RemotelockerComponent } from './itemComponents/tabRemotelocker/remotelocker.component';
+import { HoldshelfComponent } from './itemComponents/tabHoldshelf/holdshelf.component';
+import { LendingComponent } from './itemComponents/tabLending/lending.component';
+import { ConfigComponent } from './itemComponents/Config/config.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: PanelComponent },
   { path: 'remotelocker', component: RemotelockerComponent },
   { path: 'holdshelf', component: HoldshelfComponent },
   { path: 'lending', component: LendingComponent },

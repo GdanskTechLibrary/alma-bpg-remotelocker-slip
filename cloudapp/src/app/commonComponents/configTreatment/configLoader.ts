@@ -46,24 +46,6 @@ export class ConfigLoader {
                 }
             }));
 
-//.subscribe( conf => {
-//            this.conf = conf; 
-////
-//            if (conf?.idents_ordered.length ===0) {
-//                    this.restService.call<any>('/almaws/v1/conf/code-tables/UserIdentifierTypes').subscribe(result => {
-////                        this.conf.idents_ordered = this.add_indexes_to_array(result.row);
-//                        this.conf.idents_ordered = this.add_indexes_to_array(result.row);
-//                        console.log('ttt',this.conf);
-//                        this.configService.set(this.conf).subscribe(
-//                            response => {console.log('rr',response);}
-//                        );
-//                    })
-//
-//            } else {
-//                this.conf = this.config_from_memory;//
-//            }
-            
-//        });
        
     }
     public setConfig(conf: TConfig): Observable<any> {
