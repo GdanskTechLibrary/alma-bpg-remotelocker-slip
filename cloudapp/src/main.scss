@@ -1,5 +1,5 @@
 
-@import './app/commonComponents/panel/panel.component.theme';
+@import './app/mainPageComponent/panel.component.theme';
 
 @mixin themed-styles($theme, $typography) {
     /* Include themed component mixins or theme dependent styles here */
@@ -8,4 +8,7 @@
 
 @mixin global-styles {
     /* Add global styles here */
+    .loading-shade {
+        margin-top:60px!important;
+    }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TConfig } from '../../../commonStatics/types';
 
 import { FormGroup } from '@angular/forms';
 @Component({
@@ -8,22 +9,26 @@ import { FormGroup } from '@angular/forms';
 })
 export class WrappedSortableComponent implements OnInit {
   @Input() form: FormGroup;
-  @Output() form_value_var = new EventEmitter<Array<any>>();
+  @Output() config_form = new EventEmitter<TConfig>();
   @Input() idents_ordered = [];
   @Input() idents_checked = [];
+  @Input() circ_desk_l: number;
+  @Input() arr_ind: number;
+  @Input() disabled_list: boolean;
   button_all_check_caption = 'check all';
-  @Output() form_changed = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit(): void {
-    
+//    
   }
   check_all () {
     var form_value = this.form?.value;
     let areAllChecked = !this.are_all_checked();
-    form_value.idents_checked.forEach((ident, i) => {
-        form_value.idents_checked[i] = areAllChecked;
+    console.log(form_value.items,this.arr_ind);
+    form_value.items[this.arr_ind].idents.check.forEach((check, i) => {
+        
+        form_value.items[this.arr_ind].idents.check[i] = areAllChecked;
         const checkbox = document.getElementsByName('ident_ordered_'+i)[0] as HTMLInputElement;
         if (checkbox) {
             checkbox.checked  = areAllChecked;
@@ -31,25 +36,22 @@ export class WrappedSortableComponent implements OnInit {
     });
     this.button_all_check_caption = 'uncheck all';
     areAllChecked = this.are_all_checked();
-    this.form_value_var.emit(form_value);
-    this.form_changed.emit(true);
+    this.config_form.emit(form_value);
   }
   checking(value_of_index) {
     var form_value = this.form?.value;
-    form_value.idents_checked[value_of_index] = !form_value.idents_checked[value_of_index];
-    this.form_value_var.emit(form_value);
-    this.form_changed.emit(true);
+    form_value.items[this.arr_ind].idents.check[value_of_index] = !form_value.items[this.arr_ind].idents.check[value_of_index];
+    this.config_form.emit(form_value);
   }
   listOrderChanged($event) {
     var form_value = this.form?.value;
-    form_value.idents_ordered = $event;
-    this.form_value_var.emit(form_value);
-    this.form_changed.emit(true);
+    form_value.items[this.arr_ind].idents.order = $event;
+    this.config_form.emit(form_value);
   }
   are_all_checked() {
     let checked_all = true;
     var form_value = this.form?.value;
-    form_value.idents_checked.forEach((ident, i) => {
+    form_value.items[this.arr_ind].idents.check.forEach((ident, i) => {
         if (!ident) {
             checked_all = false;
         };
@@ -59,7 +61,6 @@ export class WrappedSortableComponent implements OnInit {
     } else {
         this.button_all_check_caption = 'check all';
     }
-    this.form_value_var.emit(form_value);
     return checked_all;
   }
 }

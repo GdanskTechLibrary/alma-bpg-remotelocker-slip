@@ -3,16 +3,16 @@ import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap } from 'rx
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 
-import { __passed_remotelocker } from './remotelockerMethods';
+import { __passed_transit_requests } from './filters';
 
-export function __retrieve_format_requests(user_primary_id : string, restService: CloudAppRestService)
+export function __retrieve_format_requests(user_primary_id : string, restService: CloudAppRestService, circulation_desk: string, library: string, name_with_surname?: boolean)
 {
     return restService.call<any>('/users/'+user_primary_id+'/requests?limit=100').pipe(
                 map(requests => {
                     if ((requests === null) || (requests.total_record_count === 0)) { 
                         return of(null);
                     }
-                    let books = __passed_remotelocker(requests.user_request);
+                    let books = __passed_transit_requests(requests.user_request, circulation_desk, library);
                     let books_descriptions = __select_books_descriptions(books);
                     if (books_descriptions.length !== 0) {
                         return {

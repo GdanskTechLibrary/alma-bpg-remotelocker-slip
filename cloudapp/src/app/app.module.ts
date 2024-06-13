@@ -8,11 +8,11 @@ import { SelectEntitiesModule } from 'eca-components';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { PanelComponent } from './commonComponents/panel/panel.component';
+import { PanelComponent } from './mainPageComponent/panel.component';
 import { ControlMenuComponent } from './commonComponents/control-menu/control-menu.component';
 import { ItemTemplateComponent } from './itemComponents/Template/item-template.component';
 import { NgxBarcodeModule } from '@joshmweisman/ngx-barcode';
-import { NgxSortableModule } from 'ngx-sortable'
+import { NgxSortableModule } from 'ngx-sortable';
 //import { NewrouteComponent } from './newroute/newroute.component';
 //import { ThemingComponent } from './theming/theming.component';
 import { ConfigComponent } from './itemComponents/Config/config.component';
@@ -36,7 +36,7 @@ import { WrappedSortableComponent } from './itemComponents/Config/wrapped-sortab
       ControlMenuComponent,
       ItemTemplateComponent,
       ConfigComponent,
-      WrappedSortableComponent,
+      WrappedSortableComponent,//
    ],
    imports: [
       MaterialModule,

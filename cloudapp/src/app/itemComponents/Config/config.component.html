@@ -3,15 +3,53 @@
     <button mat-flat-button type="button" color="primary" (click)="save()" disabled="{{!(form?.dirty)&&(!form_changed)}}">Save</button>
   </div>
 </app-topmenu>
-<div class="loading-shade" *ngIf="saving">
-  <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
-</div>
-<div *ngIf="form">
-  <form [formGroup]="form">
-    <section class="settings-section">
-        <ng-container *ngIf="!this.loading; else spinner">     
-            <app-wrapped-sortable [idents_ordered]="config.idents_ordered" [idents_checked]="config.idents_checked" [form]="form" (form_changed)="form_change($event)" (form_value_var)="form_var_updated($event)"> </app-wrapped-sortable>
-        </ng-container>    
-    </section>
-  </form>
-</div>
+<ng-container *ngIf="!this.loading; else spinner">   
+        <div *ngIf="form">
+          <form [formGroup]="form">
+            <section class="settings-section">
+                    <mat-form-field>
+                        <mat-label>Circulation desks</mat-label>
+                         <mat-select [formControl]="this.circulation_desks_checked" multiple (selectionChange)="change_circ_desks($event)" [compareWith]="compareItems">
+                             <mat-option *ngFor="let desk of config.circulation_desks; index as i" [value]="i" >{{ desk.circ_desk_name }}({{ desk.library_name }})</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      <mat-tab-group>
+                          <div *ngFor="let item of config.items; index as i">
+                                <mat-tab>
+                                      <ng-template mat-tab-label>
+                                          <input name="{{ item.item_id }}" (keydown.enter)="$event.preventDefault()"
+                                                 value="{{item.name}}" (input)="changeItemName($event, i)"
+                                              >
+                                          <button style="pointer-events: auto" (click)="removeTab(i, item.item_id);$event.stopPropagation()" mat-icon-button><mat-icon>close</mat-icon></button>
+                                      </ng-template>
+                                    
+                                            {{config.circulation_desks[item.item_id].circ_desk_name+'('+config.circulation_desks[item.item_id].library_name+')'}} <br/>
+                                            <div *ngIf="config.items">
+                                                <div style="width:400px;float:left">
+                                                    <div >
+                                                        <app-wrapped-sortable [disabled_list]="item.show_primary_id" [arr_ind]="i" [circ_desk_l]="item.item_id" [idents_ordered]="item.idents?.order" [idents_checked]="item.idents?.check" [form]="form" (config_form)="form_value_var($event)"> </app-wrapped-sortable> 
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" [checked]="item.show_primary_id" (change)="setShowPrimaryID($event, i);" /> Primary ID
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" [checked]="item.show_barcode" (change)="setShowBarcode($event, i);"/> Show Barcode
+                                                    </div>
+                                                </div>
+                                                <div style="margin-top:25px">
+                                                    <input type="checkbox" [checked]="item.show_fullname" (change)="setShowFullname($event, i);"/> Name with surname
+                                                </div>
+                                            </div>
+                                </mat-tab>
+                          </div>
+                      </mat-tab-group>
+            </section>
+          </form>
+        </div>
+</ng-container>    
+
+<ng-template #spinner>
+  <div class="loading-shade" *ngIf="loading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>

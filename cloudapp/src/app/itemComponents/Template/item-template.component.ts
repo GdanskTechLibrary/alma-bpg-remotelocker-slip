@@ -8,7 +8,8 @@ import { _send_slip_to_printer } from '../../commonMethods/print_slip';
 import { ConfigLoader } from '../../commonComponents/configTreatment/configLoader';
 import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
 import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
-import { TConfig } from '../../commonMethods/types';
+import { TConfig } from '../../commonStatics/types';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item-template',
@@ -20,7 +21,7 @@ export class ItemTemplateComponent implements OnInit, OnDestroy {
 
   loading = false;
   selectedEntity: Entity;
-  apiResult: any = 'default';
+  apiResult: any = [];
   idents_ordered : Array<any> = [];
   idents_checked : Array<any> = [];
   users_observable: []; 
@@ -31,10 +32,11 @@ export class ItemTemplateComponent implements OnInit, OnDestroy {
     private configService: CloudAppConfigService,
     private alert: AlertService,
     private appService: AppService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-        this.appService.setTitle('Remotelocker');
+//        console.log('ttsdfg',);
         this.get_requested_resources();
   }
 
@@ -43,11 +45,16 @@ export class ItemTemplateComponent implements OnInit, OnDestroy {
   }
 
   get_requested_resources() {
+        let path_link = this.route.snapshot['_routerState'].url;
         this.loading = true;
         let configuration = new ConfigLoader(this.restService, this.configService);
         configuration.getConfig()
             .pipe(mergeMap((conf: TConfig) => {
-                return _get_requested_resources(this.restService, conf.idents_ordered, conf.idents_checked)
+                let items = conf.items;
+                
+                let item = items.filter((item) => item.link === path_link)[0];
+                this.appService.setTitle(item.name);
+                return _get_requested_resources(this.restService, item.idents.order, item.idents.check, item.circulation_desk, item.library_code, item.show_primary_id, item.show_barcode, item.show_fullname)
            })).subscribe((result) =>{
                     this.apiResult = result;
                     this.loading = false;

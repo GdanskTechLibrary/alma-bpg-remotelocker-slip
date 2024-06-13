@@ -1,17 +1,27 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PanelComponent } from './commonComponents/panel/panel.component';
+import { Routes, RouterModule, Router } from '@angular/router';
+import { PanelComponent } from './mainPageComponent/panel.component';
 import { ItemTemplateComponent } from './itemComponents/Template/item-template.component'
 import { ConfigComponent } from './itemComponents/Config/config.component';
+import { CloudAppConfigService, CloudAppRestService } from '@exlibris/exl-cloudapp-angular-lib';
+import { ConfigLoader } from './commonComponents/configTreatment/configLoader';
 
-const routes: Routes = [
-  { path: '', component: PanelComponent },
-  { path: 'remotelocker', component: ItemTemplateComponent },
-  { path: 'config', component: ConfigComponent },
-];
+let routes: Routes = [{ path: '', component: PanelComponent },];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  private isAdmin: boolean = false;
+  constructor
+    (
+        router: Router,
+        private configService: CloudAppConfigService,
+        private restService: CloudAppRestService
+    ) {
+                routes = [...routes, {path: 'item/:id', component: ItemTemplateComponent }];
+                routes = [...routes, {path: 'config', component: ConfigComponent}];
+                router.resetConfig(routes);
+      }
+}

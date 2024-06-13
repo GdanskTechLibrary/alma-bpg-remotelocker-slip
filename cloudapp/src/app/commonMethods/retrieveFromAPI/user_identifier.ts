@@ -3,21 +3,24 @@ import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap } from 'rx
 import { CloudAppRestService, CloudAppEventsService, Request, HttpMethod, 
   Entity, RestErrorResponse, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 
-import { __choice_user_barcode } from './remotelockerMethods';
+import { __choice_user_barcode } from './filters';
+//
+import { TBookRequest, isTBookRequest } from '../../commonStatics/types';
 
-import { TBookRequest, isTBookRequest } from '../types';
 
-
-export function __retrevie_replace_uid(request : TBookRequest, restService: CloudAppRestService, idents_ordered?: Array<any>, idents_checked?: Array<any>)
+export function __retrevie_replace_uid(request : TBookRequest, restService: CloudAppRestService, idents_ordered: Array<any>, idents_checked: Array<any>, show_primary_id: boolean, show_barcode: boolean, show_fullname: boolean)
 {
     return restService.call<any>('/users/'+request.user_identifier).pipe(
                             catchError((err, o) => of(null)),
                             map(user_datas => {
                                 if (!user_datas) return of(null);
                                 return {
-                                        user_identifier: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[0], 
-                                        show_user_barcode: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[1],
-                                        identifier_type: __choice_user_barcode(user_datas, idents_ordered, idents_checked)[2],
+                                        user_identifier: __choice_user_barcode(user_datas, idents_ordered, idents_checked, show_primary_id, show_barcode, show_fullname)[0], 
+                                        show_user_barcode: __choice_user_barcode(user_datas, idents_ordered, idents_checked, show_primary_id, show_barcode, show_fullname)[1],
+                                        identifier_type: __choice_user_barcode(user_datas, idents_ordered, idents_checked, show_primary_id, show_barcode, show_fullname)[2],
+                                        fullname: user_datas.full_name,
+                                        show_fullname: show_fullname,
+                                        show_barcode: show_barcode,
                                         books_descriptions: request.books_descriptions
                                        }
 

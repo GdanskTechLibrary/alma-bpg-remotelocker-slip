@@ -1,0 +1,12 @@
+<section *ngIf="!this.loading; else spinner">
+  <eca-menu>
+      <eca-menu-item *ngFor="let item of menu" [title]="item.name" [routerLink]="item.link" [icon]="item.icon"><p>{{item.comment}}</p></eca-menu-item>
+  </eca-menu>
+</section>
+
+
+<ng-template #spinner>
+  <div class="loading-shade" *ngIf="loading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>

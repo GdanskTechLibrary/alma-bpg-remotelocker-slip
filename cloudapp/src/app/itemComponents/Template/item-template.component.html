@@ -11,14 +11,19 @@
     </div>
     <div id="print_area">
         <div *ngFor="let requester of apiResult">
-            <ngx-barcode *ngIf="requester.show_user_barcode"
+            
+            <ngx-barcode *ngIf="requester.show_barcode"
                  [bc-value]="requester.user_identifier" 
                  [bc-width]="1.6"
                  [bc-height]="50"
                  [bc-font-size]="18"
                  >
              </ngx-barcode>
-                {{ requester.user_identifier }} ({{ requester.identifier_type }})
+                {{ requester.user_identifier }} ({{ requester.identifier_type }}) <br />
+                <div *ngIf="requester.show_fullname">
+                    {{ requester.fullname }}
+                </div>
+                {{ library_code}}
                 <div *ngFor="let item of requester.books_descriptions">
                     <div style="text-align:right">
                     <!--    <ngx-barcode 
