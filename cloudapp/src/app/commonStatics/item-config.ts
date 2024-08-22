@@ -11,5 +11,6 @@ export const initial_item: TItem =
     icon: 'uxf-icon uxf-settings',
     show_primary_id: true,
     show_barcode: true,
-    show_fullname: false
+    show_fullname: false,
+    bottom_fullname: false
   }

@@ -37,7 +37,12 @@
                                                     </div>
                                                 </div>
                                                 <div style="margin-top:25px">
-                                                    <input type="checkbox" [checked]="item.show_fullname" (change)="setShowFullname($event, i);"/> Name with surname
+                                                    <div>
+                                                        <input type="checkbox" [checked]="item.show_fullname" (change)="setShowFullname($event, i);"/> Name with surname
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" [checked]="item.bottom_fullname" (change)="setBottomFullname($event, i);"/> Bottom name with surname
+                                                    </div>
                                                 </div>
                                             </div>
                                 </mat-tab>

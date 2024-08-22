@@ -8,7 +8,7 @@ import { __choice_user_barcode } from './filters';
 import { TBookRequest, isTBookRequest } from '../../commonStatics/types';
 
 
-export function __retrevie_replace_uid(request : TBookRequest, restService: CloudAppRestService, idents_ordered: Array<any>, idents_checked: Array<any>, show_primary_id: boolean, show_barcode: boolean, show_fullname: boolean)
+export function __retrevie_replace_uid(request : TBookRequest, restService: CloudAppRestService, idents_ordered: Array<any>, idents_checked: Array<any>, show_primary_id: boolean, show_barcode: boolean, show_fullname: boolean, bottom_fullname: boolean)
 {
     return restService.call<any>('/users/'+request.user_identifier).pipe(
                             catchError((err, o) => of(null)),
@@ -20,6 +20,7 @@ export function __retrevie_replace_uid(request : TBookRequest, restService: Clou
                                         identifier_type: __choice_user_barcode(user_datas, idents_ordered, idents_checked, show_primary_id, show_barcode, show_fullname)[2],
                                         fullname: user_datas.full_name,
                                         show_fullname: show_fullname,
+                                        bottom_fullname: bottom_fullname,
                                         show_barcode: show_barcode,
                                         books_descriptions: request.books_descriptions
                                        }

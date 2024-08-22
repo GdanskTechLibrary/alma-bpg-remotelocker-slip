@@ -19,8 +19,9 @@
                  [bc-font-size]="18"
                  >
              </ngx-barcode>
+            
                 {{ requester.user_identifier }} ({{ requester.identifier_type }}) <br />
-                <div *ngIf="requester.show_fullname">
+                <div *ngIf="requester.show_fullname && !requester.bottom_fullname">
                     {{ requester.fullname }}
                 </div>
                 {{ library_code}}
@@ -36,6 +37,13 @@
                         {{ item.book_brief }} <br/>
                         {{ item.book_barcode }} 
                     </div>
+                </div>
+                <div *ngIf="requester.show_fullname && requester.bottom_fullname"
+                     style="padding-top:25px;font-weight:bolder;"
+                     >
+                    <strong>
+                    {{ requester.fullname }}
+                    </strong>
                 </div>
                    <hr />  
         </div>
