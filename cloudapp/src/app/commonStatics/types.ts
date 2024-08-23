@@ -25,7 +25,8 @@ export type TItem = {
                 show_primary_id: boolean,
                 show_barcode: boolean,
                 show_fullname: boolean,
-                bottom_fullname: boolean
+                bottom_fullname: boolean,
+                group_items_by_user: boolean
             }
 
 export type TIdents = {

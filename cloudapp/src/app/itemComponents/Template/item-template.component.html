@@ -11,41 +11,28 @@
     </div>
     <div id="print_area">
         <div *ngFor="let requester of apiResult">
-            
-            <ngx-barcode *ngIf="requester.show_barcode"
-                 [bc-value]="requester.user_identifier" 
-                 [bc-width]="1.6"
-                 [bc-height]="50"
-                 [bc-font-size]="18"
-                 >
-             </ngx-barcode>
-            
-                {{ requester.user_identifier }} ({{ requester.identifier_type }}) <br />
-                <div *ngIf="requester.show_fullname && !requester.bottom_fullname">
-                    {{ requester.fullname }}
-                </div>
-                {{ library_code}}
+            <div *ngIf="requester.group_items_by_user">
+                <ng-template *ngTemplateOutlet="userDatas; context: { requester: requester }">
+                </ng-template>
                 <div *ngFor="let item of requester.books_descriptions">
-                    <div style="text-align:right">
-                    <!--    <ngx-barcode 
-                           [bc-value]="item" 
-                           [bc-width]="1.6"
-                           [bc-height]="50"
-                           [bc-font-size]="18"
-                           >
-                        </ngx-barcode> -->
-                        {{ item.book_brief }} <br/>
-                        {{ item.book_barcode }} 
-                    </div>
+                    <ng-template *ngTemplateOutlet="itemDatas; context: { item: item }">
+                    </ng-template>
                 </div>
-                <div *ngIf="requester.show_fullname && requester.bottom_fullname"
-                     style="padding-top:25px;font-weight:bolder;"
-                     >
-                    <strong>
-                    {{ requester.fullname }}
-                    </strong>
+                <ng-template *ngTemplateOutlet="userBottomFullname; context: { requester: requester }">
+                </ng-template>
+                <div style="break-after:page"></div>                
+            </div>
+            <div *ngIf="!requester.group_items_by_user">
+                <div *ngFor="let item of requester.books_descriptions">
+                    <ng-template *ngTemplateOutlet="userDatas; context: { requester: requester }">
+                    </ng-template>
+                        <ng-template *ngTemplateOutlet="itemDatas; context: { item: item }">
+                        </ng-template>
+                    <ng-template *ngTemplateOutlet="userBottomFullname; context: { requester: requester }">
+                    </ng-template>
+                    <div style="break-after:page"></div>
                 </div>
-                   <hr />  
+            </div>
         </div>
     </div>
 </ng-container>    
@@ -54,4 +41,43 @@
   <div class="loading-shade" *ngIf="loading">
     <mat-spinner diameter="50"></mat-spinner>
   </div>
+</ng-template>
+
+<ng-template #userDatas let-requester="requester">
+    <ngx-barcode *ngIf="requester.show_barcode"
+        [bc-value]="requester.user_identifier" 
+        [bc-width]="1.6"
+        [bc-height]="50"
+        [bc-font-size]="18"
+        >
+    </ngx-barcode>
+
+    {{ requester.user_identifier }} ({{ requester.identifier_type }}) <br />
+    <div *ngIf="requester.show_fullname && !requester.bottom_fullname">
+        {{ requester.fullname }}
+    </div>
+    {{ library_code}}
+</ng-template>
+
+<ng-template #itemDatas let-item="item">
+    <div style="text-align:right">
+    <!--    <ngx-barcode 
+           [bc-value]="item" 
+           [bc-width]="1.6"
+           [bc-height]="50"
+           [bc-font-size]="18"
+           >
+        </ngx-barcode> -->
+        {{ item.book_brief }} <br/>
+        {{ item.book_barcode }} 
+    </div>
+</ng-template>
+<ng-template #userBottomFullname let-requester="requester">
+     <div *ngIf="requester.show_fullname && requester.bottom_fullname"
+        style="padding-top:25px;font-weight:bolder;font-size: 20px"
+        >
+       <strong>
+       {{ requester.fullname }}
+       </strong>
+     </div>
 </ng-template>

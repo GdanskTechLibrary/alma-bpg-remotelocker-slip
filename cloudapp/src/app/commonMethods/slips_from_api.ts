@@ -9,7 +9,7 @@ import { __retrevie_replace_uid } from './retrieveFromAPI/user_identifier';
 
 import { isTBookRequest } from '../commonStatics/types';
 
-export function _get_requested_resources(restService: CloudAppRestService, idents_ordered: Array<any>, idents_checked: Array<any>, circulation_desk: string, library: string, show_primary_id: boolean, show_barcode: boolean, show_fullname: boolean, bottom_fullname: boolean): Observable<any> 
+export function _get_requested_resources(restService: CloudAppRestService, idents_ordered: Array<any>, idents_checked: Array<any>, circulation_desk: string, library: string, show_primary_id: boolean, show_barcode: boolean, show_fullname: boolean, bottom_fullname: boolean, group_items_by_user: boolean): Observable<any> 
 {
     let letter_param = '';
 
@@ -25,7 +25,7 @@ export function _get_requested_resources(restService: CloudAppRestService, ident
                     if (request === null) return of(null);
                     if ((request instanceof Observable)) return of(null);
                     if (isTBookRequest(request)) {
-                        return __retrevie_replace_uid(request, restService, idents_ordered, idents_checked, show_primary_id, show_barcode, show_fullname, bottom_fullname);
+                        return __retrevie_replace_uid(request, restService, idents_ordered, idents_checked, show_primary_id, show_barcode, show_fullname, bottom_fullname, group_items_by_user);
                     }
                 })
             )),

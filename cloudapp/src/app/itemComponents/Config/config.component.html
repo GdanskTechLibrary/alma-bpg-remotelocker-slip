@@ -43,6 +43,9 @@
                                                     <div>
                                                         <input type="checkbox" [checked]="item.bottom_fullname" (change)="setBottomFullname($event, i);"/> Bottom name with surname
                                                     </div>
+                                                    <div>
+                                                        <input type="checkbox" [checked]="item.group_items_by_user" (change)="setGroupItemsByUser($event, i);"/> Group items by user
+                                                    </div>
                                                 </div>
                                             </div>
                                 </mat-tab>

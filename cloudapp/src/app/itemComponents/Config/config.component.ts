@@ -86,7 +86,8 @@ export class ConfigComponent implements OnInit {
                 show_primary_id: false,
                 show_barcode: true,
                 show_fullname: false,
-                bottom_fullname: false
+                bottom_fullname: false,
+                group_items_by_user: true
         });//
     }
     if (cdc_diff_eval.length > 0) {
@@ -114,6 +115,10 @@ export class ConfigComponent implements OnInit {
   }//
   setBottomFullname(event, i) {
     this.config.items[i].bottom_fullname = event.target.checked;
+    this.form_changed = true;
+  }//
+  setGroupItemsByUser(event, i) {
+    this.config.items[i].group_items_by_user = event.target.checked;
     this.form_changed = true;
   }//
   setShowPrimaryID(event, i) {

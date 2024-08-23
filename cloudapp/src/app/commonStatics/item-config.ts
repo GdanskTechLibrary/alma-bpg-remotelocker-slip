@@ -12,5 +12,6 @@ export const initial_item: TItem =
     show_primary_id: true,
     show_barcode: true,
     show_fullname: false,
-    bottom_fullname: false
+    bottom_fullname: false,
+    group_items_by_user: true
   }

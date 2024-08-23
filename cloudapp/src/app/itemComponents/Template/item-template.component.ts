@@ -54,7 +54,7 @@ export class ItemTemplateComponent implements OnInit, OnDestroy {
                 
                 let item = items.filter((item) => item.link === path_link)[0];
                 this.appService.setTitle(item.name);
-                return _get_requested_resources(this.restService, item.idents.order, item.idents.check, item.circulation_desk, item.library_code, item.show_primary_id, item.show_barcode, item.show_fullname, item.bottom_fullname)
+                return _get_requested_resources(this.restService, item.idents.order, item.idents.check, item.circulation_desk, item.library_code, item.show_primary_id, item.show_barcode, item.show_fullname, item.bottom_fullname, item.group_items_by_user)
            })).subscribe((result) =>{
                     this.apiResult = result;
                     this.loading = false;
