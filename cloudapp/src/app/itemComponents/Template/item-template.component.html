@@ -2,6 +2,7 @@
   <div buttons>
       <button mat-flat-button color="secondary" (click)="get_requested_resources()" >Refresh</button>
       <button mat-flat-button color="secondary" (click)="send_slip_to_printer()" >Print</button>
+      <button mat-flat-button color="secondary" (click)="send_slip_to_printer_with_cutting()" >Print with cutting</button>
   </div>
 </app-topmenu>
 
@@ -20,7 +21,8 @@
                 </div>
                 <ng-template *ngTemplateOutlet="userBottomFullname; context: { requester: requester }">
                 </ng-template>
-                <div style="break-after:page"></div>                
+                <div class="cutting" style="break-after:page"></div>                
+                <hr class="hring" />
             </div>
             <div *ngIf="!requester.group_items_by_user">
                 <div *ngFor="let item of requester.books_descriptions">
@@ -30,7 +32,8 @@
                         </ng-template>
                     <ng-template *ngTemplateOutlet="userBottomFullname; context: { requester: requester }">
                     </ng-template>
-                    <div style="break-after:page"></div>
+                    <div class="cutting" style="break-after:page"></div>
+                    <hr class="hring" />
                 </div>
             </div>
         </div>

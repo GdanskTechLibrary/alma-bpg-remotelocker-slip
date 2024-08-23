@@ -4,7 +4,7 @@ import { CloudAppConfigService, CloudAppRestService, CloudAppEventsService, Requ
 import { MatRadioChange } from '@angular/material/radio';
 import { AppService } from '../../app.service';
 import { _get_requested_resources } from '../../commonMethods/slips_from_api';
-import { _send_slip_to_printer } from '../../commonMethods/print_slip';
+import { _send_slip_to_printer,_send_slip_to_printer_with_cutting } from '../../commonMethods/print_slip';
 import { ConfigLoader } from '../../commonComponents/configTreatment/configLoader';
 import { Observable, of, forkJoin, throwError, EMPTY } from 'rxjs';
 import { finalize, catchError, tap, map, flatMap, mergeMap, concatMap, debounceTime } from 'rxjs/operators';
@@ -42,6 +42,10 @@ export class ItemTemplateComponent implements OnInit, OnDestroy {
 
   send_slip_to_printer() {
     _send_slip_to_printer();
+  }
+
+  send_slip_to_printer_with_cutting() {
+    _send_slip_to_printer_with_cutting();
   }
 
   get_requested_resources() {
